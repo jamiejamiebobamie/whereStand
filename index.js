@@ -153,11 +153,12 @@ function truncateBinary(num){
     }
 }
 
-function winner(){
+function winner(num){
     // Calculating the 'winner' of the Josephus Problem.
     // Returns the number of people playing, the winner, the winner's number in binary.
-    let min = Math.ceil(3);
-    let max = Math.floor(42);
+    // let min = Math.ceil(3*num);
+    let max = Math.floor(Math.floor(80/num));
+    let min = Math.floor(max/2);
     let n = Math.floor(Math.random() * (max - min)) + min;
     let b = convertToBinary(n);
     let p = findHighestPow(b);
@@ -166,24 +167,46 @@ function winner(){
     return ([n, winner, truncateBinary(convertToBinary(winner))]);
 }
 
-// var winner = winner()
-// console.log(winner)
+var buttonS = document.getElementById('changeS');
+var peopleS = document.getElementById('peopleS');
+var winS = document.getElementById('winnerS');
+var binaryS = document.getElementById('binaryS');
+let win_jsS;
+var count = 10;
+var done = [];
 
+win_jsS = winner(5);
+peopleS.innerHTML = win_jsS[0];
+winS.innerHTML = win_jsS[1];
+binaryS.innerHTML = win_jsS[2];
 
-
-var button = document.getElementById('change');
-var people = document.getElementById('people');
-var win = document.getElementById('winner');
-var binary = document.getElementById('binary');
-let win_js;
-
-
-// function run()
-
-button.addEventListener("click", function(){
-    win_js = winner();
-    people.innerHTML = win_js[0];
-    win.innerHTML = win_js[1];
-    binary.innerHTML = win_js[2];
-    console.log(win_js);
+buttonS.addEventListener("click", function(){
+    if (count > 0){
+    win_jsS = winner(count);
+}
+    // if (count > 0 &&! done.includes(win_jsS[0])) {
+    // peopleS.innerHTML = win_jsS[0];
+    // done.push(win_jsS[0])
+    // winS.innerHTML = win_jsS[1];
+    // binaryS.innerHTML = win_jsS[2];
+    // buttonS.innerHTML = count;
+    // count = count - 1;
+    // console.log(count);
+    // console.log([win_jsS[0], win_jsS[1], win_jsS[2]]);
+    if (count > 0) {
+    peopleS.innerHTML = win_jsS[0];
+    done.push(win_jsS[0])
+    winS.innerHTML = win_jsS[1];
+    binaryS.innerHTML = win_jsS[2];
+    count = count - 1;
+    buttonS.innerHTML = count;
+    console.log(count);
+    console.log([win_jsS[0], win_jsS[1], win_jsS[2]]);
+} else if (count > -1){
+    peopleS.innerHTML = '41';
+    winS.innerHTML = '19';
+    binaryS.innerHTML = '10011';
+    count = 10;
+    console.log(count);
+}
 });
