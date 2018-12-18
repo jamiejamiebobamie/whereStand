@@ -168,3 +168,22 @@ function winner(){
 
 // var winner = winner()
 // console.log(winner)
+
+
+
+var button = document.getElementById('change');
+var people = document.getElementById('people');
+var win = document.getElementById('winner');
+var binary = document.getElementById('binary');
+let win_js;
+
+
+// function run()
+
+button.addEventListener("click", function(){
+    win_js = winner();
+    people.innerHTML = win_js[0];
+    win.innerHTML = win_js[1];
+    binary.innerHTML = win_js[2];
+    console.log(win_js);
+});
