@@ -193,6 +193,71 @@ peopleS.innerHTML = 3;
 winS.innerHTML = 3;
 binaryS.innerHTML = 11;
 
+
+class Node {
+    constructor(value, next, last){
+        this.value = value;
+        this.next = null;
+        this.last = null;
+    }
+}
+
+class LinkedList { //doesn't work with lasts, but nexts work
+    constructor(){
+    this.head = null;
+    this.tail = null;
+    this.len = 0;
+    this.last = null
+    }
+
+    addNode(value){
+        let newNode = new Node(value);
+        newNode.next = this.head; //a circular lists. each node's next is initially pointed to the head.
+        if (this.last != null){
+            newNode.last = this.last
+            this.tail = newNode;
+            this.last.next = newNode
+        } else {
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        this.len = this.len + 1;
+        this.last = newNode;
+    }
+
+    removeNode(node1, node2){ //remove node2
+        if (node2 != null){
+        node1.next = node2.next
+        this.len = this.len - 1; //I am not updating lasts
+    }
+}
+}
+
+// function createLL(){
+//
+// }
+//need to refactor to make it more modular and abstract
+var ll = new LinkedList();
+
+var alive = win_jsS[0]
+var living = []
+
+for (let i = 1; i <= alive; i++){
+    ll.addNode(i)
+    living.push(i)
+}
+
+var current = ll.head;
+
+function josephus(){
+    living[current.next.value-1] = living[current.next.value-1]+"x"
+    console.log(living)
+    ll.removeNode(current, current.next)
+    current = current.next
+}
+
+var here = document.getElementById("here");
+
 buttonS.addEventListener("click", function(){
     if (count > 0){
     win_jsS = winner(count);
@@ -207,4 +272,15 @@ buttonS.addEventListener("click", function(){
     binaryS.innerHTML = '10011';
     count = 7;
 }
+while (ll.len > 1) {
+        josephus()
+        var div = document.createElement("div");
+        div.style.width = "100px";
+        div.style.height = "100px";
+        div.innerHTML = living; //consider updating every "go-around", not every kill.
+        div.className = "side_panel";
+        here.appendChild(div);
+    };
 });
+
+console.log(current.value)

@@ -199,7 +199,7 @@ class LinkedList { //doesn't work with lasts, but nexts work
 
     addNode(value){
         let newNode = new Node(value);
-        newNode.next = this.head;
+        newNode.next = this.head; //a circular lists. each node's next is initially pointed to the head.
         if (this.last != null){
             newNode.last = this.last
             this.tail = newNode;
@@ -231,18 +231,19 @@ var living = []
 
 for (let i = 1; i <= alive; i++){
     ll.addNode(i)
+    living.push(i)
 }
-
 
 var current = ll.head;
 
-// console.log(current.next)
-
-while (ll.len > 1) {
-    // console.log(ll.len)
+function josephus(){
+    living[current.next.value-1] = living[current.next.value-1]+"x"
+    console.log(living)
     ll.removeNode(current, current.next)
-    // console.log(current.value)
     current = current.next
 }
-console.log(current.next.value)
-// console.log(alive)
+
+while (ll.len > 0) {
+    josephus()
+}
+console.log(current.value)
