@@ -189,9 +189,9 @@ let win_jsS;
 var count = 7;
 
 win_jsS = winner(count);
-peopleS.innerHTML = 3;
-winS.innerHTML = 3;
-binaryS.innerHTML = 11;
+peopleS.innerHTML = win_jsS[0];
+winS.innerHTML = win_jsS[1];
+binaryS.innerHTML = win_jsS[2];
 
 
 class Node {
@@ -256,9 +256,33 @@ function josephus(){
     current = current.next
 }
 
+// https://stackoverflow.com/questions/24273990/calculating-evenly-spaced-points-on-the-perimeter-of-a-circle/24274611
+
+totalPoints = win_jsS[0];
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var center = [500, 500];
+var rM = 80; //radius modifier
+
+for (var i = 1; i <= totalPoints  ; i++) {
+    ctx.fillRect(drawPoint(rM+totalPoints*(rM/10), i, totalPoints)[0]+ center[0], drawPoint(rM+totalPoints*(rM/10), i, totalPoints)[1]+ center[1], 5, 5);
+}
+
+function drawPoint(r, currentPoint, totalPoints) {
+
+    var theta = ((Math.PI*2) / totalPoints);
+    var angle = (theta * currentPoint);
+
+    var x = (r * Math.cos(angle));
+    var y = (r * Math.sin(angle));
+
+    return [x, y];
+}
+
 var here = document.getElementById("here");
 
 buttonS.addEventListener("click", function(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (count > 0){
     win_jsS = winner(count);
     peopleS.innerHTML = win_jsS[0];
@@ -266,21 +290,29 @@ buttonS.addEventListener("click", function(){
     binaryS.innerHTML = win_jsS[2];
     count = count - 1;
     buttonS.innerHTML = count;
+    totalPoints = win_jsS[0];
+    for (var i = 1; i <= totalPoints  ; i++) {
+        ctx.fillRect(drawPoint(rM+totalPoints*(rM/10), i, totalPoints)[0]+ center[0], drawPoint(rM+totalPoints*(rM/10), i, totalPoints)[1]+ center[1], 5, 5);
+    }
 } else if (count > -1){
     peopleS.innerHTML = '41';
     winS.innerHTML = '19';
     binaryS.innerHTML = '10011';
     count = 7;
+    totalPoints = 41;
+    for (var i = 1; i <= totalPoints  ; i++) {
+        ctx.fillRect(drawPoint(rM+totalPoints*(rM/10), i, totalPoints)[0]+ center[0], drawPoint(rM+totalPoints*(rM/10), i, totalPoints)[1]+ center[1], 5, 5);
+    }
 }
-while (ll.len > 1) {
-        josephus()
-        var div = document.createElement("div");
-        div.style.width = "100px";
-        div.style.height = "100px";
-        div.innerHTML = living; //consider updating every "go-around", not every kill.
-        div.className = "side_panel";
-        here.appendChild(div);
-    };
+// while (ll.len > 1) {
+//         josephus()
+//         var div = document.createElement("div");
+//         div.style.width = "100px";
+//         div.style.height = "100px";
+//         div.innerHTML = living; //consider updating every "go-around", not every kill.
+//         div.className = "side_panel";
+//         here.appendChild(div);
+//     };
 });
 
 console.log(current.value)
