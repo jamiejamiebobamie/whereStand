@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/jamiejamiebobamie/whereStand#readme",
   "dependencies": {
+    "handlebars": "^4.0.12",
+    "lodash": "^4.17.11",
     "sprity": "^1.0.8"
   }
 }

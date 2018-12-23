@@ -69,7 +69,7 @@ tile_height = 0
 spritesheet_width = 0
 spritesheet_height = 0
 
-pics = "uF/pics-noGreen/idle-reduced-FINAL/"
+pics = "uF/pics-noGreen/chosen-reduced/"
 
 files = os.listdir(pics)
 files.sort()
