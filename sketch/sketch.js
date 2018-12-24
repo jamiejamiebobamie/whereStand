@@ -228,6 +228,7 @@ let anim = [];
 
 function preload(){
     spritesheet = loadImage('testPics/sprites/idle-long.png')
+    font = loadFont('testPics/sprites/VeraMono.ttf');
 }
 
 // 20images
@@ -246,6 +247,8 @@ function drawPoint(r, currentPoint, totalPoints) {
 
 function setup(){
     createCanvas(2400, 1200);
+    textFont(font);
+    textSize(25);
     if (start == true){
     for (var i = 0; i < 185; i++) {
     // spritesheet.resize((spritesheet.width/5),(spritesheet.height/5));
@@ -257,10 +260,12 @@ function setup(){
         // var radius = totalPoints+rM
         var x = drawPoint(radius, i, totalPoints)[0]+1000
         var y = drawPoint(radius, i, totalPoints)[1]+500
-        holograms[i] = new Sprite(anim, x, y, radians(0), random(.1, .3))
+        holograms[i] = new Sprite(anim, x, y, radians(0), random(.1, .8), i)
+        // console.log(holograms[i].n)
 }
 }
 }
+
 buttonS.addEventListener("click", function(){
     if (count > 0){
     win_jsS = winner(count);
@@ -286,7 +291,7 @@ buttonS.addEventListener("click", function(){
 
 function draw(){
     background(0);
-    // rotate(radians(0))
+    // rotate(radians(60))
     for (let hologram of holograms) {
         hologram.show();
         hologram.animate();
