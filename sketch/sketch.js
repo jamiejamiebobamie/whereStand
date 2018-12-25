@@ -223,11 +223,17 @@ winS.innerHTML = [win_jsS[1],win_jsS[2]];
 
 let spritesheet;
 
-let anim = [];
+let anim_idle = [];
+let anim_wave = [];
+let anim_chosen = [];
+
+
 
 
 function preload(){
-    spritesheet = loadImage('testPics/sprites/idle-long.png')
+    idle = loadImage('testPics/sprites/idle-long.png')
+    wave = loadImage('testPics/sprites/wave.png')
+    chosen = loadImage('testPics/sprites/chosen.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
 }
 
@@ -250,17 +256,28 @@ function setup(){
     textFont(font);
     textSize(25);
     if (start == true){
+
     for (var i = 0; i < 185; i++) {
-    // spritesheet.resize((spritesheet.width/5),(spritesheet.height/5));
-    let img = spritesheet.get((i*384),0, 384, 305);
-    anim.push(img);
+    let img = idle.get((i*384),0, 384, 305);
+    anim_idle.push(img);
     }
+
+    for (var i = 0; i < 20; i++) {
+    let img = wave.get((i*1100),0, 1100, 875);
+    anim_wave.push(img);
+    }
+
+    // for (var i = 0; i < 185; i++) {
+    // let img = chosen.get((i*384),0, 384, 305);
+    // anim_chosen.push(img);
+    // }
+
     for (var i = 0; i < totalPoints; i++) {
         var radius = rM+totalPoints*(rM/5)
         // var radius = totalPoints+rM
         var x = drawPoint(radius, i, totalPoints)[0]+1000
         var y = drawPoint(radius, i, totalPoints)[1]+500
-        holograms[i] = new Sprite(anim, x, y, radians(0), random(.1, .8), i)
+        holograms[i] = new Sprite(anim_idle, anim_wave, x, y, radians(0), random(.1, .8), i)
         // console.log(holograms[i].n)
 }
 }
