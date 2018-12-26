@@ -174,7 +174,7 @@ class Node {
     }
 }
 
-class LinkedList { //doesn't work with lasts, but nexts work
+class LinkedList { //doesn't work with lasts(?), but nexts work
     constructor(){
     this.head = null;
     this.tail = null;
@@ -184,7 +184,7 @@ class LinkedList { //doesn't work with lasts, but nexts work
 
     addNode(value){
         let newNode = new Node(value);
-        newNode.next = this.head; //a circular lists. each node's next is initially pointed to the head.
+        newNode.next = this.head; //circular lists. each node's next is initially pointed to the head.
         if (this.last != null){
             newNode.last = this.last
             this.tail = newNode;
@@ -211,16 +211,24 @@ let current;
 let ll;
 let alive;
 let begin; //occurs when you've clicked on a hologram
+let end;
+let myVar;
+let myVar2;
 
 function josephus(){
     if(1 < ll.len && begin == true){
+    myVar2 = living[current.next.value-1]
     living[current.next.value-1] = living[current.next.value-1]+"x"
     console.log(living)
     ll.removeNode(current, current.next)
     current = current.next
+} else {
+    end = true;
 }}
 
 function setup(){
+    myVar2 = undefined;
+    end = false;
     begin = false;
     createCanvas(2400, 1200);
     textSize(25);
@@ -278,7 +286,7 @@ buttonS.addEventListener("click", function(){
         totalPoints = 41;
         setup();
     }
-var myVar = setInterval(josephus, 2000);
+myVar = setInterval(josephus, 2000);
 });
 
 function draw(){
@@ -292,7 +300,8 @@ function draw(){
         if (hologram.chosen) {
             begin = true;
         }
-    }
-
+        if (myVar2 != undefined){
+        holograms[myVar2-1].out = true;
+    }}
     textSize(25);
 }
