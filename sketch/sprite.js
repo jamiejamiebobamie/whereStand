@@ -21,8 +21,6 @@ class Sprite {
         this.speedStored = this.speed;
     }
 
-
-
 playIdle(){
     let z = 65;
     let index = floor(this.index) % this.len_idle
