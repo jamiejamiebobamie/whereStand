@@ -182,16 +182,16 @@ function winner(num){
 }
 //
 var buttonS = document.getElementById('changeS');
-var peopleS = document.getElementById('peopleS');
-var winS = document.getElementById('winnerS');
+// var peopleS = document.getElementById('peopleS');
+// var winS = document.getElementById('winnerS');
 // // var binaryS = document.getElementById('binaryS');
 let win_jsS;
 var count = 7;
 //
 win_jsS = winner(count);
 
-peopleS.innerHTML = win_jsS[0];
-winS.innerHTML = [win_jsS[1],win_jsS[2]];
+// peopleS.innerHTML = win_jsS[0];
+// winS.innerHTML = [win_jsS[1],win_jsS[2]];
 
 //
 // function drawPoint(r, currentPoint, totalPoints) {
@@ -226,9 +226,6 @@ let spritesheet;
 let anim_idle = [];
 let anim_wave = [];
 let anim_chosen = [];
-
-
-
 
 function preload(){
     idle = loadImage('testPics/sprites/idle-long.png')
@@ -279,15 +276,15 @@ function setup(){
         var y = drawPoint(radius, i, totalPoints)[1]+500
         holograms[i] = new Sprite(anim_idle, anim_wave, x, y, radians(0), random(.1, .8), i)
         // console.log(holograms[i].n)
-}
-}
+        }
+    }
 }
 
 buttonS.addEventListener("click", function(){
     if (count > 0){
     win_jsS = winner(count);
-    peopleS.innerHTML = win_jsS[0];
-    winS.innerHTML = win_jsS[1];
+    // peopleS.innerHTML = win_jsS[0];
+    // winS.innerHTML = win_jsS[1];
     // binaryS.innerHTML = win_jsS[2];
     count = count - 1;
     buttonS.innerHTML = count;
@@ -297,8 +294,8 @@ buttonS.addEventListener("click", function(){
     setup();
 
 } else if (count > -1) {
-    peopleS.innerHTML = '41';
-    winS.innerHTML = '19';
+    // peopleS.innerHTML = '41';
+    // winS.innerHTML = '19';
     // binaryS.innerHTML = '10011';
     count = 7;
     totalPoints = 41;
@@ -308,6 +305,8 @@ buttonS.addEventListener("click", function(){
 
 function draw(){
     background(0);
+    fill('#39FF14');
+    text('Where Should I Stand?',100,100)
     // rotate(radians(60))
     for (let hologram of holograms) {
         hologram.show();
