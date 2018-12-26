@@ -72,7 +72,7 @@ playChosen(){
     this.speed = .6
     image(this.animation_chosen[index],this.x,this.y); //11
     if (index == 66){
-        this.begin = true;
+        // this.begin = true;
         this.speed = this.freeze;
         image(this.animation_chosen[66],this.x,this.y); //11
     }}
@@ -86,19 +86,22 @@ if(this.out == false){
         this.idle = false;
     }
     if(this.wave == true && mouseIsPressed){
-        this.chosen = true
+        this.chosen = true;
+        this.begin = true;
+        this.wave = false;
         // console.log(this.chosen)
     }
 
     if (this.idle == true){
         this.playIdle();
-    } else if (this.idle == false && this.chosen == false){
+    } else if (this.idle == false && this.chosen == false && this.begin == false){
         this.playWave();
     } else {
-        this.playChosen();
+        this.playIdle()
+        // this.playChosen();
     }
 } else{
-    //death anim
+    this.playChosen();
 }
 }
 
