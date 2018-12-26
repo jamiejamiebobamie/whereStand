@@ -65,7 +65,7 @@ playWave(){
 playChosen(){
     let z = 65;
     let index = floor(this.index) % this.len_chosen
-    console.log(index)
+    // console.log(index)
     textSize(55);
     fill('#39FF14');
     text(this.n,this.x+175,this.y+z)

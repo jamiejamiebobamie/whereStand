@@ -1,115 +1,3 @@
-function convertToBinary(num){
-    //Takes in an int and returns the number in binary of base 2.
-    let number = num
-    let bi = "";
-    if (number >= 256){
-        bi += '1'
-        number -= 256
-    } else {
-        bi += '0'
-    }
-    if (number >= 128){
-        bi += '1'
-        number -= 128
-    } else {
-        bi += '0'
-    }
-    if (number >= 64){
-        bi += '1'
-        number -= 64
-    } else {
-        bi += '0'
-    }
-    if (number >= 32){
-        bi += '1'
-        number -= 32
-    } else {
-        bi += '0'
-    }
-    if (number >= 16){
-        bi += '1'
-        number -= 16
-    } else {
-        bi += '0'
-    }
-    if (number >= 8){
-        bi += '1'
-        number -= 8
-    } else {
-        bi += '0'
-    }
-    if (number >= 4){
-        bi += '1'
-        number -= 4
-    } else {
-        bi += '0'
-    }
-    if (number >= 2){
-        bi += '1'
-        number -= 2
-    } else {
-        bi += '0'
-    }
-    if (number >= 1){
-        bi += '1'
-        number -= 1
-    } else {
-        bi += '0'
-    }
-    if (number != 0){
-        return "The number entered is too high. Please enter an integer equal to 511 or below."
-    }
-    return bi
-}
-
-function findHighestPow(num){
-    // Takes in a number in binary of base 2 and returns the highest power.
-    let numb = ''+ num
-    if (numb[0] != "1" && numb[0] != "0"){
-        return ("Please enter a number in binary.")
-    }
-
-    if (numb.length > 9){
-        return "Sorry this function only converts binary numbers that are equal to 511 or below."
-    }
-
-    if (numb[0] == "1"){
-        return 256;
-    }
-    if (numb[1] == "1"){
-        return 128;
-    }
-    if (numb[2] == "1"){
-        return 64;
-    }
-    if (numb[3] == "1"){
-        return 32;
-    }
-    if (numb[4] == "1"){
-        return 16;
-    }
-    if (numb[5] == "1"){
-        return 8;
-    }
-    if (numb[6] == "1"){
-        return 4
-    }
-    if (numb[7] == "1"){
-        return 2;
-    }
-    if (numb[8] == "1"){
-        return 1;
-    }
-}
-//
-function truncateBinary(num){
-    // take in a binary number and remove the leading zeroes.
-    for (var i = 0; i < num.length; i++) {
-        // console.log(i, typeof i);
-        if (num[i] == 1)
-            return num.slice(i);
-    }
-}
 
 function winner(num){
     // Calculating the 'winner' of the Josephus Problem.
@@ -136,6 +24,7 @@ function winner(num){
 var buttonS = document.getElementById('changeS');
 let win_jsS;
 var count = 7;
+// var count = 1; the animations play with each decrease in count
 win_jsS = winner(count);
 
 // ---------------------------
@@ -165,55 +54,14 @@ function drawPoint(r, currentPoint, totalPoints) {
     return [x, y];
 }
 
-// ---------------------------
-
-class Node {
-    constructor(value, next, last){
-        this.value = value;
-        this.next = null;
-        this.last = null;
-    }
-}
-
-class LinkedList { //doesn't work with lasts(?), but nexts work
-    constructor(){
-    this.head = null;
-    this.tail = null;
-    this.len = 0;
-    this.last = null
-    }
-
-    addNode(value){
-        let newNode = new Node(value);
-        newNode.next = this.head; //circular lists. each node's next is initially pointed to the head.
-        if (this.last != null){
-            newNode.last = this.last
-            this.tail = newNode;
-            this.last.next = newNode
-        } else {
-            this.head = newNode;
-            this.tail = newNode;
-        }
-        this.len = this.len + 1;
-        this.last = newNode;
-    }
-
-    removeNode(node1, node2){ //remove node2
-        if (node2 != null){
-        node1.next = node2.next
-        this.len = this.len - 1; //I am not updating lasts
-        }
-    }
-
-}
-
 let living;
 let current;
-let ll;
+let ll; // linkedList
 let alive;
 let begin; //occurs when you've clicked on a hologram
 let end = true;
-let myVar;
+let interv1;
+let interv2;
 let myVar2;
 
 function josephus(){
@@ -236,7 +84,7 @@ function setup(){
     textFont(font);
 
 
-    if (start == true){
+    if (start == true && count == 6){
 
     for (var i = 0; i < 185; i++) {
     let img = idle.get((i*384),0, 384, 305);
@@ -251,8 +99,9 @@ function setup(){
     for (var i = 0; i < 67; i++) {
     let img = chosen.get((i*1100),0, 1100, 875);
     anim_chosen.push(img);
-    }
-
+}
+}
+if (start == true){
     for (var i = 0; i < totalPoints; i++) {
         var radius = rM+totalPoints*(rM/5)
         var x = drawPoint(radius, i, totalPoints)[0]+1000
@@ -273,41 +122,31 @@ function setup(){
     current = ll.head;
 }
 
-// // ---------------------------
-// buttonS.addEventListener("click", function(){
-//
-//     if (count > 0){
-//         win_jsS = winner(count);
-//         count = count - 1;
-//         buttonS.innerHTML = count;
-//         totalPoints = win_jsS[0];
-//         start = true;
-//         setup();
-//     } else if (count > -1) {
-//         count = 7;
-//         totalPoints = 41;
-//         setup();
-//     }
-// myVar = setInterval(josephus, 2000);
-// });
+// ---------------------------
+buttonS.addEventListener("click", function(){
 
-start = true;
+    if (count > 0){
+        win_jsS = winner(count);
+        count = count - 1;
+        buttonS.innerHTML = count;
+        totalPoints = win_jsS[0];
+        start = true;
+        setup();
+    } else if (count > -1) {
+        count = 7;
+        totalPoints = 41;
+        setup();
+    }
+interv1 = setInterval(josephus, 1500);
+});
 
-if (end == true && count <= 1){
-    win_jsS = winner(count);
-    count = count - 1;
-    buttonS.innerHTML = count;
-    totalPoints = win_jsS[0];
-    setup();
-    myVar = setInterval(josephus, 2000);
-    end = false;
-}
+// interv2 = setInterval(draw, 1000)
 
 function draw(){
     background(0);
     fill('#39FF14');
     text('Where Should I Stand?',100,100)
-
+    text(win_jsS[2],1150,600)
     for (let hologram of holograms) {
         hologram.show();
         hologram.animate();
