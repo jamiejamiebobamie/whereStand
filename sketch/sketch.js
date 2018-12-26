@@ -61,49 +61,7 @@ function convertToBinary(num){
     }
     return bi
 }
-//
-// function convertFromBinary(num){
-//     // Takes in a number in binary of base 2 and returns an integer.
-//     let dec = 0
-//     let numb = "" + num
-//     if (numb[0] != "1" && numb[0] != "0"){
-//         return ("Please enter a number in binary.")
-//     }
-//     if (len(numb) > 9){
-//         return "Sorry this function only converts binary numbers that are equal to 511 or below."
-// }
-//     numb = (9 - numb.length)*"0" + numb;
-//     if (numb[0] == "1"){
-//         dec += 256;
-//     }
-//     if (numb[1] == "1"){
-//         dec += 128;
-//     }
-//     if (numb[2] == "1"){
-//         dec += 64;
-//     }
-//     if (numb[3] == "1"){
-//         dec += 32;
-//     }
-//     if (numb[4] == "1"){
-//         dec += 16;
-//     }
-//     if (numb[5] == "1"){
-//         dec += 8;
-//     }
-//     if (numb[6] == "1"){
-//         dec += 4;
-//     }
-//     if (numb[7] == "1"){
-//         dec += 2;
-//     }
-//     if (numb[8] == "1"){
-//         dec += 1;
-//     }
-//     return dec
-// }
-//
-//
+
 function findHighestPow(num){
     // Takes in a number in binary of base 2 and returns the highest power.
     let numb = ''+ num
@@ -152,19 +110,11 @@ function truncateBinary(num){
             return num.slice(i);
     }
 }
-//
-// function makeArrNums(num){
-// var range = new Array(num);
-// for (var i = 0; i < range.length; i++){
-//     range[i] = i+1;
-//     }
-//     return range;
-// }
-//
+
 function winner(num){
     // Calculating the 'winner' of the Josephus Problem.
     // Returns the number of people playing, the winner, the winner's number in binary.
-    //The number of people playing gets progressively larger.
+    // The number of people playing gets progressively larger.
     let range = {
         7: [4,5,6,7,9],
         6: [10,11,12,13,14],
@@ -180,47 +130,14 @@ function winner(num){
     let winner = ((2*(n - p))+1);
     return ([n, winner, truncateBinary(convertToBinary(winner))]);
 }
-//
+
+// ---------------------------
 var buttonS = document.getElementById('changeS');
-// var peopleS = document.getElementById('peopleS');
-// var winS = document.getElementById('winnerS');
-// // var binaryS = document.getElementById('binaryS');
 let win_jsS;
 var count = 7;
-//
 win_jsS = winner(count);
 
-// peopleS.innerHTML = win_jsS[0];
-// winS.innerHTML = [win_jsS[1],win_jsS[2]];
-
-//
-// function drawPoint(r, currentPoint, totalPoints) {
-//     var theta = ((Math.PI*2) / totalPoints);
-//     var angle = (theta * currentPoint);
-//     var x = (r * Math.cos(angle));
-//     var y = (r * Math.sin(angle));
-//     return [x, y];
-// }
-//
-// // https://stackoverflow.com/questions/24273990/calculating-evenly-spaced-points-on-the-perimeter-of-a-circle/24274611
-//
-// totalPoints = win_jsS[0];
-// var center = [500, 500];
-// var rM = 80; //radius modifier
-//
-// for (var i = 1; i <= totalPoints  ; i++) {
-//     var radius = rM+totalPoints*(rM/10)
-//     var x = drawPoint(radius, i, totalPoints)[0]+ center[0];
-//     var y = drawPoint(radius, i, totalPoints)[1]+ center[1]
-// };
-//
-//
-
-//
-// console.log(current.value)
-
-// type php -S localhost:11000 into concole to launch
-
+// ---------------------------
 let spritesheet;
 
 let anim_idle = [];
@@ -234,8 +151,7 @@ function preload(){
     font = loadFont('testPics/sprites/VeraMono.ttf');
 }
 
-// 20images
-var start = false;
+var start = false; //occurs when you've clicked on the button for the first time
 let holograms = [];
 var rM = 100; //radius modifier
 var totalPoints = 41
@@ -248,10 +164,69 @@ function drawPoint(r, currentPoint, totalPoints) {
     return [x, y];
 }
 
+// ---------------------------
+
+class Node {
+    constructor(value, next, last){
+        this.value = value;
+        this.next = null;
+        this.last = null;
+    }
+}
+
+class LinkedList { //doesn't work with lasts, but nexts work
+    constructor(){
+    this.head = null;
+    this.tail = null;
+    this.len = 0;
+    this.last = null
+    }
+
+    addNode(value){
+        let newNode = new Node(value);
+        newNode.next = this.head; //a circular lists. each node's next is initially pointed to the head.
+        if (this.last != null){
+            newNode.last = this.last
+            this.tail = newNode;
+            this.last.next = newNode
+        } else {
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        this.len = this.len + 1;
+        this.last = newNode;
+    }
+
+    removeNode(node1, node2){ //remove node2
+        if (node2 != null){
+        node1.next = node2.next
+        this.len = this.len - 1; //I am not updating lasts
+        }
+    }
+
+}
+
+let living;
+let current;
+let ll;
+let alive;
+let begin; //occurs when you've clicked on a hologram
+
+function josephus(){
+    if(1 < ll.len && begin == true){
+    living[current.next.value-1] = living[current.next.value-1]+"x"
+    console.log(living)
+    ll.removeNode(current, current.next)
+    current = current.next
+}}
+
 function setup(){
+    begin = false;
     createCanvas(2400, 1200);
     textSize(25);
     textFont(font);
+
+
     if (start == true){
 
     for (var i = 0; i < 185; i++) {
@@ -271,46 +246,53 @@ function setup(){
 
     for (var i = 0; i < totalPoints; i++) {
         var radius = rM+totalPoints*(rM/5)
-        // var radius = totalPoints+rM
         var x = drawPoint(radius, i, totalPoints)[0]+1000
         var y = drawPoint(radius, i, totalPoints)[1]+500
         holograms[i] = new Sprite(anim_idle, anim_wave, x, y, radians(0), random(.1, .8), i)
-        // console.log(holograms[i].n)
         }
     }
+
+    ll = new LinkedList();
+    alive = win_jsS[0]
+    living = []
+
+    for (let i = 1; i <= alive; i++){
+        ll.addNode(i)
+        living.push(i)
+    }
+
+    current = ll.head;
 }
 
+// ---------------------------
 buttonS.addEventListener("click", function(){
     if (count > 0){
-    win_jsS = winner(count);
-    // peopleS.innerHTML = win_jsS[0];
-    // winS.innerHTML = win_jsS[1];
-    // binaryS.innerHTML = win_jsS[2];
-    count = count - 1;
-    buttonS.innerHTML = count;
-    totalPoints = win_jsS[0];
-    start = true;
-    // remove();
-    setup();
-
-} else if (count > -1) {
-    // peopleS.innerHTML = '41';
-    // winS.innerHTML = '19';
-    // binaryS.innerHTML = '10011';
-    count = 7;
-    totalPoints = 41;
-    setup();
+        win_jsS = winner(count);
+        count = count - 1;
+        buttonS.innerHTML = count;
+        totalPoints = win_jsS[0];
+        start = true;
+        setup();
+    } else if (count > -1) {
+        count = 7;
+        totalPoints = 41;
+        setup();
     }
+var myVar = setInterval(josephus, 2000);
 });
 
 function draw(){
     background(0);
     fill('#39FF14');
     text('Where Should I Stand?',100,100)
-    // rotate(radians(60))
+
     for (let hologram of holograms) {
         hologram.show();
         hologram.animate();
+        if (hologram.chosen) {
+            begin = true;
+        }
     }
-        textSize(25);
+
+    textSize(25);
 }

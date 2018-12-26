@@ -13,6 +13,7 @@ class Sprite {
         this.idle = true;
         this.wave = false;
         this.chosen = false;
+        this.out = false;
         this.freeze = 0;
         this.speedStored = this.speed;
     }
@@ -62,9 +63,7 @@ playChosen(){
 }
 
 show(){
-    // if (this.chosen == true){
-    //     this.playChosen();
-    // }
+if(this.out == false){
     if (dist(this.x+175, this.y+130, mouseX, mouseY) > 100) {
         this.wave = false
     } else {
@@ -73,12 +72,16 @@ show(){
     }
     if(this.wave == true && mouseIsPressed){
         this.chosen = true
+        // console.log(this.chosen)
     }
     if (this.idle == true){
         this.playIdle();
     } else {
         this.playWave();
     }
+} else {
+
+}
 }
 
     animate(){
