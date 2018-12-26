@@ -250,8 +250,8 @@ function drawPoint(r, currentPoint, totalPoints) {
 
 function setup(){
     createCanvas(2400, 1200);
-    textFont(font);
     textSize(25);
+    textFont(font);
     if (start == true){
 
     for (var i = 0; i < 185; i++) {
@@ -312,4 +312,5 @@ function draw(){
         hologram.show();
         hologram.animate();
     }
+        textSize(25);
 }

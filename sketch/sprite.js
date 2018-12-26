@@ -23,6 +23,7 @@ playIdle(){
     let z = 65;
     let index = floor(this.index) % this.len_idle
     image(this.animation_idle[index],this.x,this.y);
+    textSize(25);
     fill('#39FF14');
     text(this.n,this.x+175,this.y+z)
 }
@@ -30,10 +31,11 @@ playIdle(){
 playWave(){
     let z = 65;
     let index = floor(this.index) % this.len_wave
+    textSize(55);
+    fill('#39FF14');
+    text(this.n,this.x+175,this.y+z)
     if (this.wave == true && index < 11){
         image(this.animation_wave[index],this.x,this.y); //11
-        fill('#39FF14');
-        text(this.n,this.x+175,this.y+z)
         if (index == 10){
             this.speed = this.freeze
             image(this.animation_wave[10],this.x,this.y); //11
@@ -49,7 +51,7 @@ playWave(){
     if (this.wave == false){
             this.speed = this.speedStored
             image(this.animation_wave[index],this.x,this.y); //11
-        if (index == this.len_wave-1){
+        if (index == 19){
             this.idle = true
         }
     }
@@ -66,8 +68,8 @@ show(){
     if (dist(this.x+175, this.y+130, mouseX, mouseY) > 100) {
         this.wave = false
     } else {
+        this.wave = true;
         this.idle = false;
-        this.wave = true
     }
     if(this.wave == true && mouseIsPressed){
         this.chosen = true
