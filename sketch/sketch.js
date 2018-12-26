@@ -123,6 +123,7 @@ function winner(num){
         3: [25,26,27,28,29],
         2: [28,29,30,31,32,33],
         1: [34,35,36,37,38,39,40],
+        0: [41]
     }
     let n = range[num][Math.floor(Math.random() * range[num].length)];
     let b = convertToBinary(n);
@@ -211,7 +212,7 @@ let current;
 let ll;
 let alive;
 let begin; //occurs when you've clicked on a hologram
-let end;
+let end = true;
 let myVar;
 let myVar2;
 
@@ -228,7 +229,7 @@ function josephus(){
 
 function setup(){
     myVar2 = undefined;
-    end = false;
+    // end = false;
     begin = false;
     createCanvas(2400, 1200);
     textSize(25);
@@ -247,16 +248,16 @@ function setup(){
     anim_wave.push(img);
     }
 
-    // for (var i = 0; i < 185; i++) {
-    // let img = chosen.get((i*384),0, 384, 305);
-    // anim_chosen.push(img);
-    // }
+    for (var i = 0; i < 67; i++) {
+    let img = chosen.get((i*1100),0, 1100, 875);
+    anim_chosen.push(img);
+    }
 
     for (var i = 0; i < totalPoints; i++) {
         var radius = rM+totalPoints*(rM/5)
         var x = drawPoint(radius, i, totalPoints)[0]+1000
         var y = drawPoint(radius, i, totalPoints)[1]+500
-        holograms[i] = new Sprite(anim_idle, anim_wave, x, y, radians(0), random(.1, .8), i)
+        holograms[i] = new Sprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
         }
     }
 
@@ -272,22 +273,35 @@ function setup(){
     current = ll.head;
 }
 
-// ---------------------------
-buttonS.addEventListener("click", function(){
-    if (count > 0){
-        win_jsS = winner(count);
-        count = count - 1;
-        buttonS.innerHTML = count;
-        totalPoints = win_jsS[0];
-        start = true;
-        setup();
-    } else if (count > -1) {
-        count = 7;
-        totalPoints = 41;
-        setup();
-    }
-myVar = setInterval(josephus, 2000);
-});
+// // ---------------------------
+// buttonS.addEventListener("click", function(){
+//
+//     if (count > 0){
+//         win_jsS = winner(count);
+//         count = count - 1;
+//         buttonS.innerHTML = count;
+//         totalPoints = win_jsS[0];
+//         start = true;
+//         setup();
+//     } else if (count > -1) {
+//         count = 7;
+//         totalPoints = 41;
+//         setup();
+//     }
+// myVar = setInterval(josephus, 2000);
+// });
+
+start = true;
+
+if (end == true && count <= 1){
+    win_jsS = winner(count);
+    count = count - 1;
+    buttonS.innerHTML = count;
+    totalPoints = win_jsS[0];
+    setup();
+    myVar = setInterval(josephus, 2000);
+    end = false;
+}
 
 function draw(){
     background(0);
@@ -297,7 +311,7 @@ function draw(){
     for (let hologram of holograms) {
         hologram.show();
         hologram.animate();
-        if (hologram.chosen) {
+        if (hologram.begin) {
             begin = true;
         }
         if (myVar2 != undefined){
