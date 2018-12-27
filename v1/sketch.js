@@ -38,7 +38,7 @@ function preload(){
     idle = loadImage('testPics/sprites/idle150.png')
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
-    one = loadImage('testPics/sprites/chosenIdleWave150by119-3rows.png')
+    all = loadImage('testPics/sprites/waveIdleChosen150.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
 }
 
@@ -60,7 +60,7 @@ let current;
 let ll; // linkedList
 let alive;
 let begin; //occurs when you've clicked on a hologram
-let end;
+let end = true;
 let interv1;
 let interv2;
 let myVar2;
@@ -68,19 +68,17 @@ let myVar2;
 function josephus(){
     if(1 < ll.len && begin == true){
     myVar2 = living[current.next.value-1]
-        if (holograms[myVar2-1].out = true) {
-            living[current.next.value-1] = living[current.next.value-1]+"x"
-            console.log(living)
-            ll.removeNode(current, current.next)
-            current = current.next
-            }
-    } else if (1 == ll.len) {
+    living[current.next.value-1] = living[current.next.value-1]+"x"
+    console.log(living)
+    ll.removeNode(current, current.next)
+    current = current.next
+} else {
     end = true;
 }}
 
 function setup(){
     myVar2 = undefined;
-    end = false;
+    // end = false;
     begin = false;
     createCanvas(2400, 1200);
     textSize(25);
@@ -104,21 +102,20 @@ function setup(){
     anim_chosen.push(img);
 }
 
-// for (var i = 0; i < 67; i++) {
-// let img = one.get((i*150),0, 150, 119);
-// anim_chosen.push(img);
-// } //a single sprite sheet...
-//
 // for (var i = 0; i < 185; i++) {
-// let img = one.get((i*150),119, 150, 119);
+// let img = all.get((i*150),0, 150, 119);
 // anim_idle.push(img);
 // }
 //
 // for (var i = 0; i < 20; i++) {
-// let img = one.get((i*150),238, 150, 119);
+// let img = all.get((i*150),150, 150, 119);
 // anim_wave.push(img);
 // }
-
+//
+// for (var i = 0; i < 67; i++) {
+// let img = all.get((i*150),300, 150, 119);
+// anim_chosen.push(img);
+// } //a single sprite sheet...
 
 }
 if (start == true){
@@ -128,7 +125,7 @@ if (start == true){
         var x = drawPoint(radius, i, totalPoints)[0]+500
         var y = drawPoint(radius, i, totalPoints)[1]+600
         holograms[i] = new Sprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
-    }
+        }
     }
 
     ll = new LinkedList();
@@ -159,8 +156,6 @@ buttonS.addEventListener("click", function(){
     //     setup();
     }
 interv1 = setInterval(josephus, 1500);
-
-
 });
 
 // interv2 = setInterval(draw, 1000)
@@ -180,10 +175,6 @@ function draw(){
         }
         if (myVar2 != undefined){
         holograms[myVar2-1].out = true;
-    }
-        if (end == true){
-            holograms[win_jsS[1]-1].winner = true;
-        }
-}
+    }}
     textSize(25);
 }

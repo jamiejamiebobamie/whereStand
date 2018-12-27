@@ -17,50 +17,19 @@ class Sprite {
         this.chosen = false;
         this.out = false;
         this.begin = false;
-        this.change = false;
         this.freeze = 0;
         this.speedStored = this.speed;
         this.k = 55; // constant to add to this.n's x
         this.l = 60; // constant to add to this.n's y
-        this.green = 255
-        this.winner = false;
     }
-
-fromGreenHolo(inp){
-    let x = random(0, this.green);
-    let y = inp;
-    if(inp != x) {
-        inp = lerp(y, x, .5)
-    } else {
-        this.fromGreen(inp)
-    }
-    return inp
-} //attempting to make a recursive function that calls itself each time the target number is reached
-
-fromGreenText(inp){
-    let x = random(0, 50);
-    let y = inp;
-    if(inp != x) {
-        inp = lerp(y, x, .5)
-    } else {
-        this.fromGreen(inp)
-    }
-    return inp
-} //attempting to make a recursive function that calls itself each time the target number is reached
 
 playIdle(){
     let z = 65;
     let index = floor(this.index) % this.len_idle
     image(this.animation_idle[index],this.x,this.y);
-    if (this.winner != true){
-        textSize(25);
-        fill(0, this.fromGreenText(this.green), 0, this.fromGreenText(this.green));
-        text(this.n,this.x+this.k,this.y+this.l)
-    } else {
-        textSize(70);
-        fill(0, 255, 0, this.fromGreenHolo(this.green));
-        text(this.n,this.x+this.k,this.y+this.l)
-    }
+    textSize(25);
+    fill('#39FF14');
+    text(this.n,this.x+this.k,this.y+this.l)
 }
 
 playWave(){
@@ -85,10 +54,9 @@ playWave(){
         // }
     }
     if (this.wave == false){
-            this.speed = 1//this.speedStored
+            this.speed = this.speedStored
             image(this.animation_wave[index],this.x,this.y); //11
         if (index == 19){
-            this.speed = this.speedStored
             this.idle = true
         }
     }
@@ -101,7 +69,7 @@ playChosen(){
     textSize(25);
     fill('#39FF14');
     text(this.n,this.x+this.k,this.y+this.l)
-    this.speed = 1
+    this.speed = .6
     image(this.animation_chosen[index],this.x,this.y); //11
     if (index == 66){
         // this.begin = true;
@@ -110,7 +78,6 @@ playChosen(){
     }}
 
 show(){
-tint(this.fromGreenHolo(this.green), this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
 if(this.out == false){
     if (dist(this.x+80, this.y+70, mouseX, mouseY) > 25) {
         this.wave = false
@@ -126,33 +93,20 @@ if(this.out == false){
     }
 
     if (this.idle == true){
-        this.index = 0;
         this.playIdle();
     } else if (this.idle == false && this.chosen == false && this.begin == false){
-        this.index = 0;
         this.playWave();
     } else {
-        this.index = 0;
         this.playIdle()
         // this.playChosen();
     }
 } else{
-    this.index = 0;
     this.playChosen();
-
-    // if (this.winner == true){
-    //     textSize(55);
-    //     fill('#39FF14');
-    //     text(this.n,this.x+this.k,this.y+50)
-    //     this.playIdle()
-    // }
 }
 }
-
-
 
     animate(){
-            this.index += this.speed;
-        }
+        this.index += this.speed;
+    }
 
 }
