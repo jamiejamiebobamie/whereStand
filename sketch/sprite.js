@@ -27,7 +27,7 @@ playIdle(){
     image(this.animation_idle[index],this.x,this.y);
     textSize(25);
     fill('#39FF14');
-    text(this.n,this.x+175,this.y+z)
+    text(this.n,this.x+80,this.y+70)
 }
 
 playWave(){
@@ -35,7 +35,7 @@ playWave(){
     let index = floor(this.index) % this.len_wave
     textSize(55);
     fill('#39FF14');
-    text(this.n,this.x+175,this.y+z)
+    text(this.n,this.x+80,this.y+100)
     if (this.wave == true && index < 11){
         this.speed = 1
         image(this.animation_wave[index],this.x,this.y); //11
@@ -64,9 +64,9 @@ playChosen(){
     let z = 65;
     let index = floor(this.index) % this.len_chosen
     // console.log(index)
-    textSize(55);
+    textSize(25);
     fill('#39FF14');
-    text(this.n,this.x+175,this.y+z)
+    text(this.n,this.x+80,this.y+70)
     this.speed = .6
     image(this.animation_chosen[index],this.x,this.y); //11
     if (index == 66){
@@ -77,7 +77,7 @@ playChosen(){
 
 show(){
 if(this.out == false){
-    if (dist(this.x+175, this.y+130, mouseX, mouseY) > 100) {
+    if (dist(this.x+80, this.y+70, mouseX, mouseY) > 25) {
         this.wave = false
     } else {
         this.wave = true;

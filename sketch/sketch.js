@@ -35,9 +35,9 @@ let anim_wave = [];
 let anim_chosen = [];
 
 function preload(){
-    idle = loadImage('testPics/sprites/idle-long.png')
-    wave = loadImage('testPics/sprites/wave.png')
-    chosen = loadImage('testPics/sprites/chosen.png')
+    idle = loadImage('testPics/sprites/idle150.png')
+    wave = loadImage('testPics/sprites/wave150.png')
+    chosen = loadImage('testPics/sprites/chosen150.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
 }
 
@@ -87,25 +87,26 @@ function setup(){
     if (start == true && count == 6){
 
     for (var i = 0; i < 185; i++) {
-    let img = idle.get((i*384),0, 384, 305);
+    let img = idle.get((i*150),0, 150, 119);
     anim_idle.push(img);
     }
 
     for (var i = 0; i < 20; i++) {
-    let img = wave.get((i*1100),0, 1100, 875);
+    let img = wave.get((i*150),0, 150, 119);
     anim_wave.push(img);
     }
 
     for (var i = 0; i < 67; i++) {
-    let img = chosen.get((i*1100),0, 1100, 875);
+    let img = chosen.get((i*150),0, 150, 119);
     anim_chosen.push(img);
 }
 }
 if (start == true){
     for (var i = 0; i < totalPoints; i++) {
-        var radius = rM+totalPoints*(rM/5)
-        var x = drawPoint(radius, i, totalPoints)[0]+1000
-        var y = drawPoint(radius, i, totalPoints)[1]+500
+        // var radius = rM+totalPoints*(rM/2)
+        var radius = totalPoints*10
+        var x = drawPoint(radius, i, totalPoints)[0]+500
+        var y = drawPoint(radius, i, totalPoints)[1]+600
         holograms[i] = new Sprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
         }
     }
@@ -125,17 +126,17 @@ if (start == true){
 // ---------------------------
 buttonS.addEventListener("click", function(){
 
-    if (count > 0){
+    if (count >= 0){
         win_jsS = winner(count);
         count = count - 1;
         buttonS.innerHTML = count;
         totalPoints = win_jsS[0];
         start = true;
         setup();
-    } else if (count > -1) {
-        count = 7;
-        totalPoints = 41;
-        setup();
+    // } else if (count > -1) {
+    //     count = 7;
+    //     totalPoints = 41;
+    //     setup();
     }
 interv1 = setInterval(josephus, 1500);
 });
@@ -146,7 +147,7 @@ function draw(){
     background(0);
     fill('#39FF14');
     text('Where Should I Stand?',100,100)
-    text(win_jsS[2],1150,600)
+    text(win_jsS[2],150,200)
     for (let hologram of holograms) {
         hologram.show();
         hologram.animate();
