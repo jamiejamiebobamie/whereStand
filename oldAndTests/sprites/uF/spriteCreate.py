@@ -69,7 +69,7 @@ tile_height = 0
 spritesheet_width = 0
 spritesheet_height = 0
 
-pics = "pics-noGreen-copy2/chosen/"
+pics = "oneSprite/"
 
 files = os.listdir(pics)
 files.sort()

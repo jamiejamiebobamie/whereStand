@@ -2,11 +2,11 @@
   "name": "wherestand",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.html",
   "scripts": {
-    "start": "http-server ."
-    "test": "echo \"Error: no test specified\" && exit 1"
-    "server": "http-server"
+    "start": "node index.html"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "http-server",
   },
   "repository": {
     "type": "git",

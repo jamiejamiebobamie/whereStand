@@ -38,6 +38,7 @@ function preload(){
     idle = loadImage('testPics/sprites/idle150.png')
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
+    all = loadImage('testPics/sprites/waveIdleChosen150.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
 }
 
@@ -100,6 +101,22 @@ function setup(){
     let img = chosen.get((i*150),0, 150, 119);
     anim_chosen.push(img);
 }
+
+// for (var i = 0; i < 185; i++) {
+// let img = all.get((i*150),0, 150, 119);
+// anim_idle.push(img);
+// }
+//
+// for (var i = 0; i < 20; i++) {
+// let img = all.get((i*150),150, 150, 119);
+// anim_wave.push(img);
+// }
+//
+// for (var i = 0; i < 67; i++) {
+// let img = all.get((i*150),300, 150, 119);
+// anim_chosen.push(img);
+// } //a single sprite sheet...
+
 }
 if (start == true){
     for (var i = 0; i < totalPoints; i++) {
@@ -147,7 +164,9 @@ function draw(){
     background(0);
     fill('#39FF14');
     text('Where Should I Stand?',100,100)
-    text(win_jsS[2],150,200)
+    if (start){
+        text(win_jsS[2],150,200)
+    }
     for (let hologram of holograms) {
         hologram.show();
         hologram.animate();
