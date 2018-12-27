@@ -64,19 +64,27 @@ let end;
 let interv1;
 let interv2;
 let myVar2;
+let centerX = 500;
+let centerY = 530;
+// let done;
 
 function josephus(){
     if(1 < ll.len && begin == true){
     myVar2 = living[current.next.value-1]
-        if (holograms[myVar2-1].out = true) {
+        if (holograms[myVar2-1].out == true){// && done == true) { //.out was set to s ingle equal sign...
             living[current.next.value-1] = living[current.next.value-1]+"x"
             console.log(living)
             ll.removeNode(current, current.next)
             current = current.next
+            done =false;
             }
     } else if (1 == ll.len) {
     end = true;
 }}
+
+function timerz(){
+    done = true
+}
 
 function setup(){
     myVar2 = undefined;
@@ -125,8 +133,8 @@ if (start == true){
     for (var i = 0; i < totalPoints; i++) {
         // var radius = rM+totalPoints*(rM/2)
         var radius = totalPoints*10
-        var x = drawPoint(radius, i, totalPoints)[0]+500
-        var y = drawPoint(radius, i, totalPoints)[1]+600
+        var x = drawPoint(radius, i, totalPoints)[0]+centerX
+        var y = drawPoint(radius, i, totalPoints)[1]+centerY
         holograms[i] = new Sprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
     }
     }
@@ -158,8 +166,9 @@ buttonS.addEventListener("click", function(){
     //     totalPoints = 41;
     //     setup();
     }
-interv1 = setInterval(josephus, 1500);
-
+interv1 = setInterval(josephus, 800);
+// let varVar = josephus()
+// interv2 = setInterval(timerz, 1500)
 
 });
 
@@ -168,9 +177,14 @@ interv1 = setInterval(josephus, 1500);
 function draw(){
     background(0);
     fill('#39FF14');
-    text('Where Should I Stand?',100,100)
-    if (start){
-        text(win_jsS[2],150,200)
+    if (start == false){
+        text('Where Should I Stand?',100,100)
+    } else if (start == true && end == false){
+        text(living,100,100)
+        text("winner: " + win_jsS[2],100,150)
+    } else {
+        text(living,100,100)
+        text("winner: " + win_jsS[1],100,150)
     }
     for (let hologram of holograms) {
         hologram.show();
@@ -185,5 +199,5 @@ function draw(){
             holograms[win_jsS[1]-1].winner = true;
         }
 }
-    textSize(25);
+textSize(25);
 }

@@ -107,7 +107,7 @@ playChosen(){
     textSize(25);
     fill('#39FF14');
     text(this.n,this.x+this.k,this.y+this.l)
-    this.speed = 1
+    this.speed = 1;
     image(this.animation_chosen[index],this.x,this.y); //11
     if (index == 66){
         // this.begin = true;
