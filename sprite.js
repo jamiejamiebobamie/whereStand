@@ -48,6 +48,12 @@ fromGreenText(inp){
     return inp
 } //attempting to make a recursive function that calls itself each time the target number is reached
 
+setIndex(){
+    if (this.change == true){
+    this.index = 0;
+    this.change = false;
+}}
+
 playIdle(){
     let z = 65;
     let index = floor(this.index) % this.len_idle
@@ -110,6 +116,7 @@ playChosen(){
     }}
 
 show(){
+// this.setIndex() //how do i make a closure to reset the index so that the anim is played properly from the beginning? i could make an index for each anim...
 tint(this.fromGreenHolo(this.green), this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
 if(this.out == false){
     if (dist(this.x+80, this.y+70, mouseX, mouseY) > 25) {
@@ -124,20 +131,15 @@ if(this.out == false){
         this.wave = false;
         // console.log(this.chosen)
     }
-
     if (this.idle == true){
-        this.index = 0;
         this.playIdle();
     } else if (this.idle == false && this.chosen == false && this.begin == false){
-        this.index = 0;
         this.playWave();
     } else {
-        this.index = 0;
         this.playIdle()
         // this.playChosen();
     }
-} else{
-    this.index = 0;
+} else {
     this.playChosen();
 
     // if (this.winner == true){
