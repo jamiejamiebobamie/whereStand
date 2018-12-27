@@ -2,9 +2,11 @@
   "name": "wherestand",
   "version": "1.0.0",
   "description": "",
-  "main": "sprite.js",
+  "main": "app.js",
   "scripts": {
+    "start": "http-server ."
     "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "http-server"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,8 @@
   },
   "homepage": "https://github.com/jamiejamiebobamie/whereStand#readme",
   "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.12",
     "lodash": "^4.17.11",
     "sprity": "^1.0.8"

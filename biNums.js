@@ -62,48 +62,6 @@ function convertToBinary(num){
     return bi
 }
 
-function convertFromBinary(num){
-    // Takes in a number in binary of base 2 and returns an integer.
-    let dec = 0
-    let numb = "" + num
-    if (numb[0] != "1" && numb[0] != "0"){
-        return ("Please enter a number in binary.")
-    }
-    if (len(numb) > 9){
-        return "Sorry this function only converts binary numbers that are equal to 511 or below."
-}
-    numb = (9 - numb.length)*"0" + numb;
-    if (numb[0] == "1"){
-        dec += 256;
-    }
-    if (numb[1] == "1"){
-        dec += 128;
-    }
-    if (numb[2] == "1"){
-        dec += 64;
-    }
-    if (numb[3] == "1"){
-        dec += 32;
-    }
-    if (numb[4] == "1"){
-        dec += 16;
-    }
-    if (numb[5] == "1"){
-        dec += 8;
-    }
-    if (numb[6] == "1"){
-        dec += 4;
-    }
-    if (numb[7] == "1"){
-        dec += 2;
-    }
-    if (numb[8] == "1"){
-        dec += 1;
-    }
-    return dec
-}
-
-
 function findHighestPow(num){
     // Takes in a number in binary of base 2 and returns the highest power.
     let numb = ''+ num
@@ -143,7 +101,7 @@ function findHighestPow(num){
         return 1;
     }
 }
-
+//
 function truncateBinary(num){
     // take in a binary number and remove the leading zeroes.
     for (var i = 0; i < num.length; i++) {
@@ -152,19 +110,3 @@ function truncateBinary(num){
             return num.slice(i);
     }
 }
-
-function winner(){
-    // Calculating the 'winner' of the Josephus Problem.
-    // Returns the number of people playing, the winner, the winner's number in binary.
-    let min = Math.ceil(3);
-    let max = Math.floor(42);
-    let n = Math.floor(Math.random() * (max - min)) + min;
-    let b = convertToBinary(n);
-    let p = findHighestPow(b);
-    // console.log(n);
-    let winner = ((2*(n - p))+1);
-    return ([n, winner, truncateBinary(convertToBinary(winner))]);
-}
-
-// var winner = winner()
-// console.log(winner)
