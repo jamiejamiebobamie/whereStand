@@ -1,3 +1,8 @@
+//TO-DO ::
+//Implement an arched-line class that draws a dotted, arched line from one out person to the next person, with
+//the apex of the arched line at the center of the the center of the circle and the (not-out) person who is between the two people out.
+//The lines are stored in a 5-line queue in sketch.js (only the last five lines are displayed/kept in the queue).
+
 
 function winner(num){
     // Calculating the 'winner' of the Josephus Problem.
@@ -38,11 +43,11 @@ function preload(){
     idle = loadImage('testPics/sprites/idle150.png')
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
-    one = loadImage('testPics/sprites/chosenIdleWave150by119-3rows.png')
+    // one = loadImage('testPics/sprites/chosenIdleWave150by119-3rows.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
 }
 
-var start = false; //occurs when you've clicked on the button for the first time
+var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
 let holograms = [];
 var rM = 100; //radius modifier
 var totalPoints = 41
@@ -66,25 +71,19 @@ let interv2;
 let myVar2;
 let centerX = 500;
 let centerY = 530;
-// let done;
 
 function josephus(){
     if(1 < ll.len && begin == true){
     myVar2 = living[current.next.value-1]
-        if (holograms[myVar2-1].out == true){// && done == true) { //.out was set to s ingle equal sign...
+        if (holograms[myVar2-1].out == true){
             living[current.next.value-1] = living[current.next.value-1]+"x"
             console.log(living)
             ll.removeNode(current, current.next)
             current = current.next
-            done =false;
             }
     } else if (1 == ll.len) {
     end = true;
 }}
-
-function timerz(){
-    done = true
-}
 
 function setup(){
     myVar2 = undefined;
@@ -125,13 +124,12 @@ function setup(){
 // for (var i = 0; i < 20; i++) {
 // let img = one.get((i*150),238, 150, 119);
 // anim_wave.push(img);
-// }
+// } //could not loop for some reason... questionably/slightly improved performance when switching from idle_anim to wave_anim.
 
 
 }
 if (start == true){
     for (var i = 0; i < totalPoints; i++) {
-        // var radius = rM+totalPoints*(rM/2)
         var radius = totalPoints*10
         var x = drawPoint(radius, i, totalPoints)[0]+centerX
         var y = drawPoint(radius, i, totalPoints)[1]+centerY
@@ -161,18 +159,11 @@ buttonS.addEventListener("click", function(){
         totalPoints = win_jsS[0];
         start = true;
         setup();
-    // } else if (count > -1) {
-    //     count = 7;
-    //     totalPoints = 41;
-    //     setup();
     }
+
 interv1 = setInterval(josephus, 800);
-// let varVar = josephus()
-// interv2 = setInterval(timerz, 1500)
 
 });
-
-// interv2 = setInterval(draw, 1000)
 
 function draw(){
     background(0);
