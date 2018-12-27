@@ -169,13 +169,13 @@ function draw(){
     background(0);
     fill('#39FF14');
     if (start == false){
-        text('Where Should I Stand?',100,100)
+        text('Where Should I Stand?',50,100)
     } else if (start == true && end == false){
-        text(living,100,100)
-        text("winner: " + win_jsS[2],100,150)
+        text(living,50,100)
+        text("winner: " + win_jsS[2],50,150)
     } else {
         text(living,100,100)
-        text("winner: " + win_jsS[1],100,150)
+        text("winner: " + win_jsS[1],50,150)
     }
     for (let hologram of holograms) {
         hologram.show();
