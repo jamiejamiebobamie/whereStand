@@ -29,7 +29,6 @@ function winner(num){
 var buttonS = document.getElementById('changeS');
 let win_jsS;
 var count = 7;
-// var count = 1; the animations play with each decrease in count
 win_jsS = winner(count);
 
 // ---------------------------
@@ -43,7 +42,6 @@ function preload(){
     idle = loadImage('testPics/sprites/idle150.png')
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
-    // one = loadImage('testPics/sprites/chosenIdleWave150by119-3rows.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
 }
 
@@ -97,37 +95,22 @@ function setup(){
     if (start == true && count == 6){
 
     for (var i = 0; i < 185; i++) {
-    let img = idle.get((i*150),0, 150, 119);
-    anim_idle.push(img);
+        let img = idle.get((i*150),0, 150, 119);
+        anim_idle.push(img);
     }
 
     for (var i = 0; i < 20; i++) {
-    let img = wave.get((i*150),0, 150, 119);
-    anim_wave.push(img);
+        let img = wave.get((i*150),0, 150, 119);
+        anim_wave.push(img);
     }
 
     for (var i = 0; i < 67; i++) {
-    let img = chosen.get((i*150),0, 150, 119);
-    anim_chosen.push(img);
-}
-
-// for (var i = 0; i < 67; i++) {
-// let img = one.get((i*150),0, 150, 119);
-// anim_chosen.push(img);
-// } //a single sprite sheet...
-//
-// for (var i = 0; i < 185; i++) {
-// let img = one.get((i*150),119, 150, 119);
-// anim_idle.push(img);
-// }
-//
-// for (var i = 0; i < 20; i++) {
-// let img = one.get((i*150),238, 150, 119);
-// anim_wave.push(img);
-// } //could not loop for some reason... questionably/slightly improved performance when switching from idle_anim to wave_anim.
-
+        let img = chosen.get((i*150),0, 150, 119);
+        anim_chosen.push(img);
+    }
 
 }
+
 if (start == true){
     for (var i = 0; i < totalPoints; i++) {
         var radius = totalPoints*10
@@ -174,7 +157,7 @@ function draw(){
         text(living,50,100)
         text("winner: " + win_jsS[2],50,150)
     } else {
-        text(living,100,100)
+        text(living,50,100)
         text("winner: " + win_jsS[1],50,150)
     }
     for (let hologram of holograms) {
