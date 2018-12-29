@@ -34,14 +34,16 @@ win_jsS = winner(count);
 // ---------------------------
 let spritesheet;
 
-let spec_anim_idle = [];
+// let spec_anim_idle = [];
 
 let anim_idle = [];
 let anim_wave = [];
 let anim_chosen = [];
 
 function preload(){
-    specIdle = loadImage('testPics/sprites/spec-spritesheet-idle-1200by675.png')
+    // space = loadImage('testPics/space-img.jpg')
+    // hex = loadImage('testPics/hexagon.png')
+    // specIdle = loadImage('testPics/sprites/spec-spritesheet-idle-1200by675.png')
     idle = loadImage('testPics/sprites/idle150.png')
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
@@ -50,7 +52,7 @@ function preload(){
 
 var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
 let holograms = [];
-let spectators = [];
+// let spectators = [];
 var rM = 100; //radius modifier
 var totalPoints = 41
 
@@ -71,6 +73,7 @@ let end;
 let interv1;
 let interv2;
 let myVar2;
+let guess;
 let centerX = 500;
 let centerY = 530;
 
@@ -94,14 +97,14 @@ function setup(){
     createCanvas(2400, 1200);
     textSize(25);
     textFont(font);
-
-if (start == false && count == 7){
-    for (var i = 0; i < 117; i++) {
-        let img = specIdle.get((i*1200), 0, 1200, 675);
-        spec_anim_idle.push(img);
-    }
-console.log(true)
-}
+//
+// if (start == false && count == 7){
+//     for (var i = 0; i < 117; i++) {
+//         let img = specIdle.get((i*1200), 0, 1200, 675);
+//         spec_anim_idle.push(img);
+//     }
+// console.log(true)
+// }
 
 
     if (start == true && count == 6){
@@ -125,9 +128,9 @@ console.log(true)
 
 if (start == true){
 
-    for (var i = 0; i < 1; i++) {
-    spectators[i] = new SpectatorSprite(spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, 750, 290, .4)
-}
+//     for (var i = 0; i < 1; i++) {
+//     spectators[i] = new SpectatorSprite(spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, 750, 290, .4)
+// }
 
     for (var i = 0; i < totalPoints; i++) {
         var radius = totalPoints*10
@@ -169,20 +172,51 @@ interv1 = setInterval(josephus, 800);
 
 function draw(){
     background(0);
+    // background(space);
+    // background(hex);
     fill('#39FF14');
     if (start == false){
         text('Where Should I Stand?',50,100)
-    } else if (start == true && end == false){
-        text(living,50,100)
-        text("winner: " + win_jsS[2],50,150)
     } else {
         text(living,50,100)
+        textSize(35);
+        text('Where Should I Stand?',1000,200)
+        textSize(25);
+        text('Every other person is out.',1100,275)
+        text('To win, pick the last man standing.',1100,325)
+        text('The winner\'s place is written',1100,375)
+        text('in binary to the left.',1100,425)
+        if (begin == true){
+        text('guess:  ' + guess,1120,513)
+    }
+        if ( end == true){
         text("winner: " + win_jsS[1],50,150)
+            if (win_jsS[1] == guess) {
+                textSize(35);
+                text('You\'re right!',1100, 700)
+                text('The number ' + win_jsS[1] + ' is ' + win_jsS[2] + ' in binary.',1100, 775)
+            } else{
+                textSize(25);
+                text('Try again.',1100, 600)
+                text('In binary, you read the numbers from right to left',1100, 675)
+                text('and add up the values as you go.',1100, 725)
+                text('The values are powers of two:',1100, 775)
+                text('32, 16, 8, 4, 2, 1',1150, 825)
+                text('If there\s a 1, add that value to the number.',1100, 875)
+                text('If there\s a 0, don\'t add that value.',1100, 925)
+                text('1 = 1',1150, 1000)
+                text('10 = 2',1320, 1050)
+                text('11 = 3',1520, 1100)
+
+            }
+    } else {
+        text("winner: " + win_jsS[2],50,150)
     }
     for (let hologram of holograms) {
         hologram.show();
         hologram.animate();
         if (hologram.begin) {
+            guess = hologram.n
             begin = true;
         }
         if (myVar2 != undefined){
@@ -192,10 +226,11 @@ function draw(){
             holograms[win_jsS[1]-1].winner = true;
         }
 }
-for (let spectator of spectators){
-    noTint();
-spectator.show();
-spectator.animate();
-}
+// for (let spectator of spectators){
+//     noTint();
+// spectator.show();
+// spectator.animate();
+// }
 textSize(25);
+}
 }
