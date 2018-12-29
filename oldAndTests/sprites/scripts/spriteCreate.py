@@ -61,7 +61,7 @@
 from PIL import Image
 import os, math, time
 # max_frames_row = 10.0
-max_frames_row = 1 #attempting to make a single column spritesheet
+# max_frames_row = 1 #attempting to make a single column spritesheet
 frames = []
 tile_width = 0
 tile_height = 0
@@ -69,13 +69,13 @@ tile_height = 0
 spritesheet_width = 0
 spritesheet_height = 0
 
-pics = "oneSprite/"
+pics = "../sprite-spectator/spec-point4/"
 
 files = os.listdir(pics)
 files.sort()
 print(files)
 
-# max_frames_row = len(files)
+max_frames_row = len(files)
 
 for current_file in files :
     try:
@@ -87,18 +87,18 @@ for current_file in files :
 tile_width = frames[0].size[0]
 tile_height = frames[0].size[1]
 
-if len(frames) > max_frames_row :
-    spritesheet_width = tile_width * max_frames_row
-    required_rows = math.ceil(len(frames)/max_frames_row)
-    spritesheet_height = tile_height * required_rows
-else:
-    spritesheet_width = tile_width*len(frames)
-    spritesheet_height = tile_height
+# if len(frames) > max_frames_row :
+#     spritesheet_width = tile_width * max_frames_row
+#     required_rows = math.ceil(len(frames)/max_frames_row)
+#     spritesheet_height = tile_height * required_rows
+# else:
+#     spritesheet_width = tile_width*len(frames)
+#     spritesheet_height = tile_height
 
-# # #attempting to make all sprite sheets a single row
-# spritesheet_width = tile_width * max_frames_row
-# required_rows = math.ceil(len(frames)/max_frames_row)
-# spritesheet_height = tile_height * required_rows
+# #attempting to make all sprite sheets a single row
+spritesheet_width = tile_width * max_frames_row
+required_rows = math.ceil(len(frames)/max_frames_row)
+spritesheet_height = tile_height * required_rows
 
 print(spritesheet_height)
 print(spritesheet_width)

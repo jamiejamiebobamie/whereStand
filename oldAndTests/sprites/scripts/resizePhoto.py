@@ -3,9 +3,9 @@ import os, sys
 from PIL import Image
 import glob
 
-size = 150, 150
+size = 1200, 1200
 
-frames = glob.glob("pics-noGreen-copy2/chosen/*.png")
+frames = glob.glob("../sprite-spectator/spec-point4/*.png")
 for frame in frames:
     with open(frame, 'rb') as file:
         outfile = os.path.splitext(file.name)[0] + ".png"
