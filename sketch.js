@@ -178,6 +178,11 @@ function draw(){
     if (start == false){
         text('Where Should I Stand?',50,100)
     } else {
+
+        if (begin == true){
+        text(living,50,100)
+        text('guess:  ' + guess, 50 , 200)//1120,513)
+    } else {
         text(living,50,100)
         textSize(35);
         text('Where Should I Stand?',1000,200)
@@ -186,27 +191,26 @@ function draw(){
         text('To win, pick the last man standing.',1100,325)
         text('The winner\'s place is written',1100,375)
         text('in binary to the left.',1100,425)
-        if (begin == true){
-        text('guess:  ' + guess,1120,513)
     }
         if ( end == true){
         text("winner: " + win_jsS[1],50,150)
             if (win_jsS[1] == guess) {
                 textSize(35);
-                text('You\'re right!',1100, 700)
-                text('The number ' + win_jsS[1] + ' is ' + win_jsS[2] + ' in binary.',1100, 775)
+                text('You\'re right!',1100, 400)
+                text('The number ' + win_jsS[1] + ' is ' + win_jsS[2] + ' in binary.',1100, 475)
             } else{
+                textSize(35);
+                text('Try again.',1100, 275)
                 textSize(25);
-                text('Try again.',1100, 600)
-                text('In binary, you read the numbers from right to left',1100, 675)
-                text('and add up the values as you go.',1100, 725)
-                text('The values are powers of two:',1100, 775)
-                text('32, 16, 8, 4, 2, 1',1150, 825)
-                text('If there\s a 1, add that value to the number.',1100, 875)
-                text('If there\s a 0, don\'t add that value.',1100, 925)
-                text('1 = 1',1150, 1000)
-                text('10 = 2',1320, 1050)
-                text('11 = 3',1520, 1100)
+                text('In binary, you read the numbers from right to left',1100, 350)
+                text('and add up the values as you go.',1100, 400)
+                text('The values are powers of two:',1100, 475)
+                text('32, 16, 8, 4, 2, 1',1150, 525)
+                text('If there\'s a 1, add that value to the number.',1100, 575)
+                text('If there\'s a 0, don\'t add that value.',1100, 625)
+                text('1 = 1',1150, 700)
+                text('10 = 2',1320, 750)
+                text('11 = 3',1520, 800)
 
             }
     } else {

@@ -56,18 +56,23 @@ setIndex(){
 }}
 
 playIdle(){
+    textSize(25);
+    let index = floor(this.index) % this.len_idle
     if (this.winner != true){
-        textSize(25);
+        // textSize(25);
         fill(0, this.fromGreenText(this.green), 0, this.fromGreenText(this.green));
         text(this.n,this.x+this.k,this.y+this.l)
+        image(this.animation_idle[index],this.x,this.y);
     } else {
-        textSize(70);
+        image(this.animation_idle[index],this.x,this.y);
+        // textSize(70);
         fill(0, 255, 0, this.fromGreenHolo(this.green));
-        text(this.n,this.x+this.k+this.k,this.y+this.l+this.l)
+        // text(this.n,this.x+this.k+this.k,this.y+this.l+this.l)
+        // text(this.n,500,500)
+        text(this.n,this.x+this.k,this.y+this.l)
     }
-    let z = 65;
-    let index = floor(this.index) % this.len_idle
-    image(this.animation_idle[index],this.x,this.y);
+
+    // image(this.animation_idle[index],this.x,this.y);
 }
 
 playWave(){
