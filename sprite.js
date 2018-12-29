@@ -6,6 +6,7 @@ class Sprite {
         this.animation_chosen = chosen;
         this.rotation = rotation;
         this.index = 0;
+        this.indexChosen = 0;
         this.len_idle = this.animation_idle.length
         this.len_wave = this.animation_wave.length
         this.len_chosen = this.animation_chosen.length
@@ -102,7 +103,7 @@ playWave(){
 
 playChosen(){
     let z = 65;
-    let index = floor(this.index) % this.len_chosen
+    let index = floor(this.indexChosen) % this.len_chosen
     // console.log(index)
     textSize(25);
     fill('#39FF14');
@@ -154,7 +155,11 @@ if(this.out == false){
 
 
     animate(){
+        if (this.out == true){
+            this.indexChosen += this.speed;
+        } else {
             this.index += this.speed;
         }
+}
 
 }
