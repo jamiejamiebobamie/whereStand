@@ -34,11 +34,14 @@ win_jsS = winner(count);
 // ---------------------------
 let spritesheet;
 
+let spec_anim_idle = [];
+
 let anim_idle = [];
 let anim_wave = [];
 let anim_chosen = [];
 
 function preload(){
+    specIdle = loadImage('testPics/sprites/spec-spritesheet-idle-1200by675.png')
     idle = loadImage('testPics/sprites/idle150.png')
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
@@ -47,6 +50,7 @@ function preload(){
 
 var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
 let holograms = [];
+let spectators = [];
 var rM = 100; //radius modifier
 var totalPoints = 41
 
@@ -91,6 +95,14 @@ function setup(){
     textSize(25);
     textFont(font);
 
+if (start == false && count == 7){
+    for (var i = 0; i < 117; i++) {
+        let img = specIdle.get((i*1200), 0, 1200, 675);
+        spec_anim_idle.push(img);
+    }
+console.log(true)
+}
+
 
     if (start == true && count == 6){
 
@@ -112,12 +124,18 @@ function setup(){
 }
 
 if (start == true){
+
+    for (var i = 0; i < 1; i++) {
+    spectators[i] = new SpectatorSprite(spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, 750, 290, .4)
+}
+
     for (var i = 0; i < totalPoints; i++) {
         var radius = totalPoints*10
         var x = drawPoint(radius, i, totalPoints)[0]+centerX
         var y = drawPoint(radius, i, totalPoints)[1]+centerY
-        holograms[i] = new Sprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
+        holograms[i] = new HologramSprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
     }
+
     }
 
     ll = new LinkedList();
@@ -130,6 +148,7 @@ if (start == true){
     }
 
     current = ll.head;
+
 }
 
 // ---------------------------
@@ -172,6 +191,11 @@ function draw(){
         if (end == true){
             holograms[win_jsS[1]-1].winner = true;
         }
+}
+for (let spectator of spectators){
+    noTint();
+spectator.show();
+spectator.animate();
 }
 textSize(25);
 }
