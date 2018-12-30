@@ -178,14 +178,11 @@ function draw(){
     if (start == false){
         text('Where Should I Stand?',50,100)
     } else {
-
+        text(living,50,75)
+        text("winner: " + win_jsS[2],50,150)
         if (begin == true){
-        text(living,50,100)
         text('guess:  ' + guess, 50 , 200)//1120,513)
     } else {
-        text(living,50,100)
-        textSize(35);
-        text('Where Should I Stand?',1000,200)
         textSize(25);
         text('Every other person is out.',1100,275)
         text('To win, pick the last man standing.',1100,325)
@@ -193,7 +190,7 @@ function draw(){
         text('in binary to the left.',1100,425)
     }
         if ( end == true){
-        text("winner: " + win_jsS[1],50,150)
+        // text("winner: " + win_jsS[1],50,150)
             if (win_jsS[1] == guess) {
                 textSize(35);
                 text('You\'re right!',1100, 400)
@@ -205,21 +202,19 @@ function draw(){
                 text('In binary, you read the numbers from right to left',1100, 350)
                 text('and add up the values as you go.',1100, 400)
                 text('The values are powers of two:',1100, 475)
-                text('32, 16, 8, 4, 2, 1',1150, 525)
+                text('32, 16, 8, 4, 2, 1.',1150, 525)
                 text('If there\'s a 1, add that value to the number.',1100, 575)
                 text('If there\'s a 0, don\'t add that value.',1100, 625)
-                text('1 = 1',1150, 700)
-                text('10 = 2',1320, 750)
-                text('11 = 3',1520, 800)
-
+                text('1 = 1, 10 = 2, 11 = 3, 100 = 4, and so on!',1100, 675)
+                text('(Hint: Don\'t guess evens.)',1100, 750)
             }
     } else {
-        text("winner: " + win_jsS[2],50,150)
+        // text("winner: " + win_jsS[2],50,150)
     }
     for (let hologram of holograms) {
         hologram.show();
         hologram.animate();
-        if (hologram.begin) {
+        if (hologram.begin && begin == false) {
             guess = hologram.n
             begin = true;
         }
