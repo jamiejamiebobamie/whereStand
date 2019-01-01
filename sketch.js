@@ -14,8 +14,8 @@ function winner(num){
         5: [15,16,17,18,19],
         4: [20,21,22,23,24],
         3: [25,26,27,28,29],
-        2: [28,29,30,31,32,33],
-        1: [34,35,36,37,38,39,40],
+        2: [30,31,32,33,34],
+        1: [35,36,37,38,39,40],
         0: [41]
     }
     let n = range[num][Math.floor(Math.random() * range[num].length)];
@@ -52,6 +52,7 @@ function preload(){
 
 var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
 let holograms = [];
+let dots = [];
 // let spectators = [];
 var rM = 100; //radius modifier
 var totalPoints = 41
@@ -139,6 +140,17 @@ if (start == true){
         holograms[i] = new HologramSprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
     }
 
+    // let k = 10;
+    //
+    // for (var i = 0; i < totalPoints; i++) {
+    //     fill(255)
+    //     // var radius = k+totalPoints/k
+    //     var radius = 8*totalPoints - 10;
+    //     var x = drawPoint(radius, i, totalPoints)[0]+centerX+70
+    //     var y = drawPoint(radius, i, totalPoints)[1]+centerY+55
+    //     dots[i] = new Dot(x, y, i);
+    // } //to include "not-out" dots that turn to black / transparent when the corresponding index becomes out.
+
     }
 
     ll = new LinkedList();
@@ -182,12 +194,15 @@ function draw(){
         text("winner: " + win_jsS[2],50,150)
         if (begin == true){
         text('guess:  ' + guess, 50 , 200)//1120,513)
+        // for (let dot of dots) {
+        //     dot.show()
+        // }
     } else {
         textSize(25);
         text('Every other person is out.',1100,275)
-        text('To win, pick the last man standing.',1100,325)
-        text('The winner\'s place is written',1100,375)
-        text('in binary to the left.',1100,425)
+        text('To win, pick the last man standing.',1100,350)
+        text('The winner\'s place is written',1100,425)
+        text('in binary to the left.',1150,475)
     }
         if ( end == true){
         // text("winner: " + win_jsS[1],50,150)
@@ -200,13 +215,13 @@ function draw(){
                 text('Try again.',1100, 275)
                 textSize(25);
                 text('In binary, you read the numbers from right to left',1100, 350)
-                text('and add up the values as you go.',1100, 400)
+                text('and add up the values as you go.',1150, 400)
                 text('The values are powers of two:',1100, 475)
                 text('32, 16, 8, 4, 2, 1.',1150, 525)
-                text('If there\'s a 1, add that value to the number.',1100, 575)
-                text('If there\'s a 0, don\'t add that value.',1100, 625)
-                text('1 = 1, 10 = 2, 11 = 3, 100 = 4, and so on!',1100, 675)
-                text('(Hint: Don\'t guess evens.)',1100, 750)
+                text('If there\'s a 1, add that value to the number.',1100, 600)
+                text('If there\'s a 0, don\'t add that value.',1100, 650)
+                text('1 = 1, 10 = 2, 11 = 3, 100 = 4, and so on!',1100, 725)
+                text('(Hint: Don\'t guess evens.)',1100, 800)
             }
     } else {
         // text("winner: " + win_jsS[2],50,150)
@@ -225,6 +240,7 @@ function draw(){
             holograms[win_jsS[1]-1].winner = true;
         }
 }
+
 // for (let spectator of spectators){
 //     noTint();
 // spectator.show();
