@@ -26,7 +26,8 @@ function winner(num){
 }
 
 // ---------------------------
-var buttonS = document.getElementById('changeS');
+var forward = document.getElementById('forward');
+var back = document.getElementById('back');
 let win_jsS;
 var count = 7;
 win_jsS = winner(count);
@@ -51,8 +52,8 @@ function preload(){
 }
 
 var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
-let holograms = [];
-let dots = [];
+let holograms;
+// let dots = [];
 // let spectators = [];
 var rM = 100; //radius modifier
 var totalPoints = 41
@@ -72,11 +73,12 @@ let alive;
 let begin; //occurs when you've clicked on a hologram
 let end;
 let interv1;
-let interv2;
+// let interv2;
 let myVar2;
 let guess;
 let centerX = 500;
 let centerY = 530;
+// let outNum;
 
 function josephus(){
     if(1 < ll.len && begin == true){
@@ -106,8 +108,8 @@ function setup(){
 // console.log(true)
 // }
 
-
-    if (start == true && count == 6){
+    //
+    // if (start == true && count == 6){
 
     for (var i = 0; i < 185; i++) {
         let img = idle.get((i*150),0, 150, 119);
@@ -124,62 +126,133 @@ function setup(){
         anim_chosen.push(img);
     }
 
-}
-
-if (start == true){
-
-//     for (var i = 0; i < 1; i++) {
-//     spectators[i] = new SpectatorSprite(spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, 750, 290, .4)
+refresh()
 // }
 
-    for (var i = 0; i < totalPoints; i++) {
-        var radius = totalPoints*10
-        var x = drawPoint(radius, i, totalPoints)[0]+centerX
-        var y = drawPoint(radius, i, totalPoints)[1]+centerY
-        holograms[i] = new HologramSprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
-    }
-
-    for (var i = 0; i < totalPoints; i++) {
-        fill(255)
-        // var radius = k+totalPoints/k
-        var radius = 10*totalPoints - 30;
-        var x = drawPoint(radius, i, totalPoints)[0]+centerX+70
-        var y = drawPoint(radius, i, totalPoints)[1]+centerY+60
-        dots[i] = new Dot(x, y, i);
-    } //to include "not-out" dots that turn to black / transparent when the corresponding index becomes out.
-
-    tracer = new Tracer();
-
-    }
-
-    ll = new LinkedList();
-    alive = win_jsS[0]
-    living = []
-
-    for (let i = 1; i <= alive; i++){
-        ll.addNode(i)
-        living.push(i)
-    }
-
-    current = ll.head;
+// if (start == true){
+//
+// //     for (var i = 0; i < 1; i++) {
+// //     spectators[i] = new SpectatorSprite(spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, 750, 290, .4)
+// // }
+//
+//     for (var i = 0; i < totalPoints; i++) {
+//         var radius = totalPoints*10
+//         var x = drawPoint(radius, i, totalPoints)[0]+centerX
+//         var y = drawPoint(radius, i, totalPoints)[1]+centerY
+//         holograms[i] = new HologramSprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
+//     }
+//
+//     // for (var i = 0; i < totalPoints; i++) {
+//     //     fill(255)
+//     //     // var radius = k+totalPoints/k
+//     //     var radius = 10*totalPoints - 30;
+//     //     var x = drawPoint(radius, i, totalPoints)[0]+centerX+70
+//     //     var y = drawPoint(radius, i, totalPoints)[1]+centerY+60
+//     //     dots[i] = new Dot(x, y, i);
+//     // } //to include "not-out" dots that turn to black / transparent when the corresponding index becomes out.
+//
+//     // tracer = new Tracer();
+//
+//     }
+//
+//     ll = new LinkedList();
+//     alive = win_jsS[0]
+//     living = []
+//
+//     for (let i = 1; i <= alive; i++){
+//         ll.addNode(i)
+//         living.push(i)
+//     }
+//
+//     current = ll.head;
 
 }
 
-// ---------------------------
-buttonS.addEventListener("click", function(){
+function refresh(){
+    holograms = [];
+    myVar2 = undefined;
+    end = false;
+    begin = false;
+    // background(0);
 
-    if (count >= 0){
-        win_jsS = winner(count);
+
+    if (start == true){
+
+    //     for (var i = 0; i < 1; i++) {
+    //     spectators[i] = new SpectatorSprite(spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, spec_anim_idle, 750, 290, .4)
+    // }
+
+        for (var i = 0; i < totalPoints; i++) {
+            var radius = totalPoints*10
+            var x = drawPoint(radius, i, totalPoints)[0]+centerX
+            var y = drawPoint(radius, i, totalPoints)[1]+centerY
+            holograms[i] = new HologramSprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
+        }
+
+        // for (var i = 0; i < totalPoints; i++) {
+        //     fill(255)
+        //     // var radius = k+totalPoints/k
+        //     var radius = 10*totalPoints - 30;
+        //     var x = drawPoint(radius, i, totalPoints)[0]+centerX+70
+        //     var y = drawPoint(radius, i, totalPoints)[1]+centerY+60
+        //     dots[i] = new Dot(x, y, i);
+        // } //to include "not-out" dots that turn to black / transparent when the corresponding index becomes out.
+
+        // tracer = new Tracer();
+
+        }
+
+        ll = new LinkedList();
+        alive = win_jsS[0]
+        living = []
+
+        for (let i = 1; i <= alive; i++){
+            ll.addNode(i)
+            living.push(i)
+        }
+
+        current = ll.head;
+}
+
+
+// ---------------------------
+forward.addEventListener("click", function(){
+
+    if (count > 0){
+        forward.innerHTML = 'next level';
         count = count - 1;
-        buttonS.innerHTML = count;
+        win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
-        setup();
+        refresh();
+    } else{
+        forward.innerHTML = 'replay';
+        count = 7;
+        win_jsS = winner(count);
+        totalPoints = win_jsS[0];
+        start = true;
+        refresh();
     }
 
 interv1 = setInterval(josephus, 800);
 
 });
+
+back.addEventListener("click", function(){
+
+    if (count < 7){
+        count = count + 1;
+        win_jsS = winner(count);
+        totalPoints = win_jsS[0];
+        start = true;
+        refresh();
+    }
+
+interv1 = setInterval(josephus, 800);
+
+});
+
+
 
 function draw(){
     background(0);
@@ -192,16 +265,31 @@ function draw(){
         text(living,50,75)
         text("winner: " + win_jsS[2],50,150)
         if (begin == true){
-        text('guess:  ' + guess, 50 , 200)//1120,513)
-    } else {
+        text('guess:  ' + guess, 50 , 200)
+
+        // TRACER CLASS TO BETTER SHOW THE PROGRESSION OF OUTS
+        //
+        // if (myVar2 != undefined && end == false && myVar2 != outNum){
+        //     tracer.beginX = tracer.x;
+        //     tracer.beginY = tracer.y;
+        //     tracer.endX = dots[myVar2-1].x
+        //     tracer.endY = dots[myVar2-1].y
+        //     tracer.change = true;
+        //     outNum = myVar2;
+        //     }
+        //
+        // tracer.chacha()
+        // tracer.show()
+        // console.log(tracer.change, tracer.endX, tracer.endY)
+
+        } else {
         textSize(25);
         text('Every other person is out.',1100,275)
         text('To win, pick the last man standing.',1100,350)
         text('The winner\'s place is written',1100,425)
         text('in binary to the left.',1150,475)
-    }
+        }
         if ( end == true){
-        // text("winner: " + win_jsS[1],50,150)
             if (win_jsS[1] == guess) {
                 textSize(35);
                 text('You\'re right!',1100, 400)
@@ -219,9 +307,8 @@ function draw(){
                 text('1 = 1, 10 = 2, 11 = 3, 100 = 4, and so on!',1100, 725)
                 text('(Hint: Don\'t guess evens.)',1100, 800)
             }
-    } else {
-        // text("winner: " + win_jsS[2],50,150)
     }
+
     for (let hologram of holograms) {
         hologram.show();
         hologram.animate();
@@ -237,24 +324,20 @@ function draw(){
         }
 }
 
-for (let dot of dots) {
-    dot.show()
-if (myVar2 != undefined){
-    dots[myVar2-1].out = true;
-    }
-}
+// for (let dot of dots) {
+//     dot.show()
+// if (myVar2 != undefined){
+//     dots[myVar2-1].out = true;
+//     }
+// }
 
-if (myVar2 != undefined && end == false && tracer.doOnce == true){
-    tracer.endX = dots[myVar2-1].x
-    tracer.endY = dots[myVar2-1].y
-    console.log(tracer.doOnce, tracer.change, tracer.x, tracer.y)
-    }
-tracer.show()
+
 // for (let spectator of spectators){
 //     noTint();
 // spectator.show();
 // spectator.animate();
 // }
 textSize(25);
+console.log(count)
 }
 }

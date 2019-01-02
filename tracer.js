@@ -16,28 +16,28 @@ class Tracer {
         this.step = .03;
         this.pct = 0;
         this.change = false;
-        this.doOnce = true;
-
     }
 
 
-show() {
-
-    if (this.endX != this.x || this.endY != this.y){
-        this.change = true;
-    } else if (this.endX == this.x && this.endY == this.y) {
-        this.doOnce = true;
-    };
-
-    if(this.change == true && this.doOnce == true){
+chacha(){
+    if(this.change == true){
         this.pct = 0.0;
         this.beginX = this.x;
         this.beginY = this.y;
         this.distX = this.endX - this.beginX;
         this.distY = this.endY - this.beginY;
-        // this.change = false;
-        // this.doOnce = false;
+        this.change = false;
         }
+}
+
+show() {
+
+    // if (this.endX != this.x || this.endY != this.y){
+    //     this.change = true;
+    // } else if (this.endX == this.x && this.endY == this.y) {
+    //     this.change = false;
+    //     this.doOnce = true;
+    // };
 
 if (this.pct < 1.0) {
       if(this.distX > 0) {
@@ -61,6 +61,7 @@ if (this.pct < 1.0) {
   }
       fill(10,255, 10); ellipse(this.x, this.y, 5, 5);
 }
+
 }
 
 
