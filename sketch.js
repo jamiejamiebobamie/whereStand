@@ -9,14 +9,15 @@ function winner(num){
     // Returns the number of people playing, the winner, the winner's number in binary.
     // The number of people playing gets progressively larger.
     let range = {
-        7: [4,5,6,7,9],
-        6: [10,11,12,13,14],
-        5: [15,16,17,18,19],
-        4: [20,21,22,23,24],
-        3: [25,26,27,28,29],
-        2: [30,31,32,33,34],
-        1: [35,36,37,38,39,40],
-        0: [41]
+        9: [3],
+        8: [4,5,6,7,9],
+        7: [10,11,12,13,14],
+        6: [15,16,17,18,19],
+        5: [20,21,22,23,24],
+        4: [25,26,27,28,29],
+        3: [30,31,32,33,34],
+        2: [35,36,37,38,39,40],
+        1: [41]
     }
     let n = range[num][Math.floor(Math.random() * range[num].length)];
     let b = convertToBinary(n);
@@ -26,10 +27,12 @@ function winner(num){
 }
 
 // ---------------------------
+var title = document.getElementById('title');
 var forward = document.getElementById('forward');
+var re_up = document.getElementById('re_up');
 var back = document.getElementById('back');
 let win_jsS;
-var count = 7;
+var count = 9;
 win_jsS = winner(count);
 
 // ---------------------------
@@ -126,7 +129,7 @@ function setup(){
         anim_chosen.push(img);
     }
 
-refresh()
+    refresh()
 // }
 
 // if (start == true){
@@ -216,18 +219,34 @@ function refresh(){
 
 
 // ---------------------------
+
+title.addEventListener("click", function(){
+    start = false;
+    count = 9;
+    forward.innerHTML = 'next level';
+    refresh();
+});
+
+
 forward.addEventListener("click", function(){
 
-    if (count > 0){
+    if (count > 2){
         forward.innerHTML = 'next level';
         count = count - 1;
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
         refresh();
-    } else{
+    } else if (count > 1) {
         forward.innerHTML = 'replay';
-        count = 7;
+        count = count - 1;
+        win_jsS = winner(count);
+        totalPoints = win_jsS[0];
+        start = true;
+        refresh();
+    } else {
+        forward.innerHTML = 'next level';
+        count = 8;
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
@@ -238,9 +257,19 @@ interv1 = setInterval(josephus, 800);
 
 });
 
+re_up.addEventListener("click", function(){
+        win_jsS = winner(count);
+        totalPoints = win_jsS[0];
+        start = true;
+        refresh();
+
+interv1 = setInterval(josephus, 800);
+
+});
+
 back.addEventListener("click", function(){
 
-    if (count < 7){
+    if (count < 8){
         count = count + 1;
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
@@ -249,7 +278,6 @@ back.addEventListener("click", function(){
     }
 
 interv1 = setInterval(josephus, 800);
-
 });
 
 
@@ -262,7 +290,8 @@ function draw(){
     if (start == false){
         text('Where Should I Stand?',50,100)
     } else {
-        text(living,50,75)
+        // text(living,50,50)
+        text("level: " + ( 9 - count ),50,100)
         text("winner: " + win_jsS[2],50,150)
         if (begin == true){
         text('guess:  ' + guess, 50 , 200)
@@ -338,6 +367,5 @@ function draw(){
 // spectator.animate();
 // }
 textSize(25);
-console.log(count)
 }
 }
