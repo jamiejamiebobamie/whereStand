@@ -83,7 +83,6 @@ function josephus(){
     myVar2 = living[current.next.value-1]
         if (holograms[myVar2-1].out == true){
             living[current.next.value-1] = living[current.next.value-1]+"x"
-            console.log(living)
             ll.removeNode(current, current.next)
             current = current.next
             }
@@ -140,16 +139,16 @@ if (start == true){
         holograms[i] = new HologramSprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
     }
 
-    // let k = 10;
-    //
-    // for (var i = 0; i < totalPoints; i++) {
-    //     fill(255)
-    //     // var radius = k+totalPoints/k
-    //     var radius = 8*totalPoints - 10;
-    //     var x = drawPoint(radius, i, totalPoints)[0]+centerX+70
-    //     var y = drawPoint(radius, i, totalPoints)[1]+centerY+55
-    //     dots[i] = new Dot(x, y, i);
-    // } //to include "not-out" dots that turn to black / transparent when the corresponding index becomes out.
+    for (var i = 0; i < totalPoints; i++) {
+        fill(255)
+        // var radius = k+totalPoints/k
+        var radius = 10*totalPoints - 30;
+        var x = drawPoint(radius, i, totalPoints)[0]+centerX+70
+        var y = drawPoint(radius, i, totalPoints)[1]+centerY+60
+        dots[i] = new Dot(x, y, i);
+    } //to include "not-out" dots that turn to black / transparent when the corresponding index becomes out.
+
+    tracer = new Tracer();
 
     }
 
@@ -194,9 +193,6 @@ function draw(){
         text("winner: " + win_jsS[2],50,150)
         if (begin == true){
         text('guess:  ' + guess, 50 , 200)//1120,513)
-        // for (let dot of dots) {
-        //     dot.show()
-        // }
     } else {
         textSize(25);
         text('Every other person is out.',1100,275)
@@ -241,6 +237,19 @@ function draw(){
         }
 }
 
+for (let dot of dots) {
+    dot.show()
+if (myVar2 != undefined){
+    dots[myVar2-1].out = true;
+    }
+}
+
+if (myVar2 != undefined && end == false && tracer.doOnce == true){
+    tracer.endX = dots[myVar2-1].x
+    tracer.endY = dots[myVar2-1].y
+    console.log(tracer.doOnce, tracer.change, tracer.x, tracer.y)
+    }
+tracer.show()
 // for (let spectator of spectators){
 //     noTint();
 // spectator.show();
