@@ -122,11 +122,10 @@ playChosen(){
     }}
 
 show(){
-    push();
-rotate(this.rotation);
 // this.setIndex() //how do i make a closure to reset the index so that the anim is played properly from the beginning? i could make an index for each anim...
-tint(this.fromGreenHolo(this.green), this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
+// tint(this.fromGreenHolo(this.green), this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
 if(this.out == false){
+    tint(this.fromGreenHolo(this.green), this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
     if (dist(this.x+80, this.y+70, mouseX, mouseY) > 25) {
         this.wave = false
     } else {
@@ -148,16 +147,17 @@ if(this.out == false){
         // this.playChosen();
     }
 } else {
+    tint(this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
+    // tint(this.fromGreenHolo(this.green), this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
     this.playChosen();
-
-    // if (this.winner == true){
-    //     textSize(55);
-    //     fill('#39FF14');
-    //     text(this.n,this.x+this.k,this.y+50)
-    //     this.playIdle()
-    // }
 }
-pop();
+
+// if (this.winner == true){
+//     textSize(55);
+//     fill('#39FF14');
+//     // text(this.n,this.x+this.k,this.y+50)
+//     this.playIdle()
+// }
 }
 
 
