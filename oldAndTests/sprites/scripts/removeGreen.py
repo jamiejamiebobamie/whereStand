@@ -146,7 +146,7 @@ def rgb_to_hsv(r, g, b):
 GREEN_RANGE_MIN_HSV = (50, 80, 50)
 GREEN_RANGE_MAX_HSV = (185, 255, 255)
 
-frames = glob.glob("pics2/*.jpg")
+frames = glob.glob("../sprite-title/pics-Green/*.jpg")
 for frame in frames:
     with open(frame, 'rb') as file:
         im = Image.open(file)
