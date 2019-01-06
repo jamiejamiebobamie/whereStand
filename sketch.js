@@ -52,6 +52,7 @@ function preload(){
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
+    // testScale = loadImage('oldAndTests/sprites/sprite-title/pics-noGreen/frame0.png')
 }
 
 var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
@@ -289,6 +290,11 @@ function draw(){
     fill('#39FF14');
     if (start == false){
         text('Where Should I Stand?',50,100)
+        // push();
+        // scale(.75); //.75 scale is good and .1 is the smallest it should go.
+        // noTint();
+        // image(testScale, 100, 100)
+        // pop();
     } else {
         // text(living,50,50)
         text("level: " + ( 9 - count ),50,100)

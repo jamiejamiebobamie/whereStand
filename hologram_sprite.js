@@ -136,28 +136,37 @@ if(this.out == false){
         this.chosen = true;
         this.begin = true;
         this.wave = false;
+        this.idle = true;
         // console.log(this.chosen)
     }
-    if (this.idle == true){
+    if (this.idle == true && this.winner != true){
         this.playIdle();
     } else if (this.idle == false && this.chosen == false && this.begin == false){
         this.playWave();
+    } else if (this.winner == true) {
+        textSize(55);
+        fill('#39FF14');
+        // text(this.n,this.x+this.k,this.y+50)
+        this.wave = true;
+        this.playWave();
+        // this.playIdle()
+        // this.playChosen();
     } else {
         this.playIdle()
-        // this.playChosen();
     }
 } else {
     tint(this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
     // tint(this.fromGreenHolo(this.green), this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
     this.playChosen();
 }
-
 // if (this.winner == true){
 //     textSize(55);
 //     fill('#39FF14');
 //     // text(this.n,this.x+this.k,this.y+50)
-//     this.playIdle()
+//     this.wave = true;
+//     // this.playIdle()
 // }
+
 }
 
 

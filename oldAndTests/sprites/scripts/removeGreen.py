@@ -143,10 +143,13 @@ def rgb_to_hsv(r, g, b):
     return h, s, v
 
 
-GREEN_RANGE_MIN_HSV = (50, 80, 50)
+GREEN_RANGE_MIN_HSV = (85, 80, 70)
 GREEN_RANGE_MAX_HSV = (185, 255, 255)
 
 frames = glob.glob("../sprite-title/pics-Green/*.jpg")
+
+count = 0
+
 for frame in frames:
     with open(frame, 'rb') as file:
         im = Image.open(file)
@@ -166,3 +169,5 @@ for frame in frames:
                 if min_h <= h <= max_h and min_s <= s <= max_s and min_v <= v <= max_v:
                     pix[x, y] = (0, 0, 0, 0)
         im.save(name + 'png')
+        count += 1
+        print(str(len(frames)-count) + " left")
