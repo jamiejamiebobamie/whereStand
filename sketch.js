@@ -56,6 +56,7 @@ function preload(){
     font = loadFont('testPics/sprites/VeraMono.ttf');
     title_idle = loadImage('testPics/sprites/SpriteSheet_title-idle-115-471x500.png')
     title_wave = loadImage('testPics/sprites/SpriteSheet_title-wave-18-471x500.png')
+    title_chosen = loadImage('testPics/sprites/SpriteSheet_title-chosen-87-471x500.png')
     title_point1 = loadImage('testPics/sprites/SpriteSheet_title-point1-51-471x500.png')
     title_point2 = loadImage('testPics/sprites/SpriteSheet_title-point2-49-471x500.png')
     title_point3 = loadImage('testPics/sprites/SpriteSheet_title-point3-38-471x500.png')
@@ -147,6 +148,11 @@ function setup(){
         titleWave.push(img);
     }
 
+    for (var i = 0; i < 87; i++) {
+        let img = title_chosen.get((i*471),0, 471, 500);
+        titleChosen.push(img);
+    }
+
     for (var i = 0; i < 51; i++) {
         let img = title_point1.get((i*471),0, 471, 500);
         titlePoint1.push(img);
@@ -172,7 +178,7 @@ function setup(){
 for (var i = 0; i < 5; i++){
     let x = random(0, 1700);
     let y = random(100, 700);
-    titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleWave, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.1, .3))
+    titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.1, .3))
 }
 // }
 

@@ -94,27 +94,28 @@ if (this.wave == false){
 }
 
 playPoint(){
+
     push();
     scale(this.scale);
     if (this.y < mouseY){
         if ((mouseX - this.x) > 100){
             let index1 = floor(this.index) % this.len_point1
-            image(this.animation_point1[index],this.x,this.y); //11
+            image(this.animation_point1[index1],this.x,this.y); //11
             //play point1
         }
          else if ((mouseX - this.x) > 50){
              let index2 = floor(this.index) % this.len_point2
-             image(this.animation_point2[index],this.x,this.y); //11
+             image(this.animation_point2[index2],this.x,this.y); //11
             //play point2
         }
         if ((mouseX - this.x) < -100){
-            let index3 = floor(this.index) % this.len_point4
-            image(this.animation_point4[index],this.x,this.y); //11
+            let index4 = floor(this.index) % this.len_point4
+            image(this.animation_point4[index4],this.x,this.y); //11
             //play point4
         }
          else if ((mouseX - this.x) < 0){
-            let index4 = floor(this.index) % this.len_point3
-            image(this.animation_point3[index],this.x,this.y); //11
+            let index3 = floor(this.index) % this.len_point3
+            image(this.animation_point3[index3],this.x,this.y); //11
             //play point3
         }
     } else {
@@ -126,7 +127,10 @@ playPoint(){
 
 playChosen(){
     let index = floor(this.indexChosen) % this.len_chosen
+    push();
+    scale(this.scale);
     image(this.animation_chosen[index],this.x,this.y); //11
+    pop();
     }
 
 
@@ -144,13 +148,15 @@ noTint();
         this.chosen = true;
         this.wave = false;
     }
-    if (this.idle == true && this.point == false){
+    if (this.chosen == true){
+        this.playChosen();
+    // } else if (this.point == true){
+    //     // this.playPoint()
+    } else if (this.idle == true){
         this.playIdle()
-    } else if (this.idle == true && this.point == true){
-        this.playPoint()
+    } else {
+        this.playWave();
     }
-    console.log(this.idle)
-
 }
 
 animate(){
