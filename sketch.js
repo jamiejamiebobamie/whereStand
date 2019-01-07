@@ -1,8 +1,3 @@
-//TO-DO ::
-//Implement an arched-line class that draws a dotted, arched line from one out person to the next person, with
-//the apex of the arched line at the center of the the center of the circle and the (not-out) person who is between the two people out.
-//The lines are stored in a 5-line queue in sketch.js (only the last five lines are displayed/kept in the queue).
-
 
 function winner(num){
     // Calculating the 'winner' of the Josephus Problem.
@@ -44,15 +39,22 @@ let anim_idle = [];
 let anim_wave = [];
 let anim_chosen = [];
 
+let title_idle = [];
+let title_wave = [];
+let title_chosen = [];
+let title_point1 = [];
+let title_point2 = [];
+let title_point3 = [];
+let title_point4 = [];
+
+
 function preload(){
-    // space = loadImage('testPics/space-img.jpg')
-    // hex = loadImage('testPics/hexagon.png')
     // specIdle = loadImage('testPics/sprites/spec-spritesheet-idle-1200by675.png')
     idle = loadImage('testPics/sprites/idle150.png')
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
-    // testScale = loadImage('oldAndTests/sprites/sprite-title/pics-noGreen/frame0.png')
+    testScale = loadImage('testPics/sprites/SpriteSheet_title-idle-115-471x500.png')
 }
 
 var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
@@ -130,7 +132,19 @@ function setup(){
         anim_chosen.push(img);
     }
 
+    for (var i = 0; i < 115; i++) {
+        let img = testScale.get((i*471),0, 471, 500);
+        title_idle.push(img);
+    }
+
     refresh()
+testTest = []
+for (var i = 0; i < 5; i++){
+    let x = random(0, 1700);
+    let y = random(100, 700);
+    testTest[i] = new TitleSprite(title_idle, title_idle, title_idle, title_idle, title_idle, title_idle, title_idle, x, y, random(.1, .8))
+    console.log(x, y)
+}
 // }
 
 // if (start == true){
@@ -285,18 +299,14 @@ interv1 = setInterval(josephus, 800);
 
 function draw(){
     background(0);
-    // background(space);
-    // background(hex);
     fill('#39FF14');
     if (start == false){
         text('Where Should I Stand?',50,100)
-        // push();
-        // scale(.75); //.75 scale is good and .1 is the smallest it should go.
-        // noTint();
-        // image(testScale, 100, 100)
-        // pop();
+        for (let test of testTest) {
+            test.show();
+            test.animate();
+        }
     } else {
-        // text(living,50,50)
         text("level: " + ( 9 - count ),50,100)
         text("winner: " + win_jsS[2],50,150)
         if (begin == true){
