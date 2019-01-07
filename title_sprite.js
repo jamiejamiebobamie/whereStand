@@ -9,7 +9,12 @@ class TitleSprite {
         this.animation_point3 = point3;
         this.animation_point4 = point4;
         this.index = 0;
+        this.indexWave = 0;
         this.indexChosen = 0;
+        this.len_point1 = this.animation_point1
+        this.len_point2 = this.animation_point2
+        this.len_point3 = this.animation_point3
+        this.len_point4 = this.animation_point4
         this.len_idle = this.animation_idle.length
         this.len_wave = this.animation_wave.length
         this.len_chosen = this.animation_chosen.length
@@ -23,6 +28,9 @@ class TitleSprite {
         this.freeze = 0;
         this.speedStored = this.speed;
         this.green = 255
+        this.MouseOverX = this.x*this.scale+(193*this.scale);
+        this.MouseOverY = this.y*this.scale+(250*this.scale);
+        this.MouseOverArea = 100*this.scale;
     }
 
 fromGreenHolo(inp){
@@ -59,7 +67,61 @@ pop();
 
 playWave(){
     let index = floor(this.index) % this.len_wave
+    push();
+    scale(this.scale)
+
     image(this.animation_wave[index],this.x,this.y); //11
+    if (index == 5){
+        this.speed = this.freeze
+        image(this.animation_wave[5],this.x,this.y); //11
+    }
+    // if (this.chosen){
+    //     this.speed = this.speedStored
+    //     image(this.animation_wave[index],this.x,this.y); //11
+    //     if (index == this.len_wave-1){
+    //         playChosen();
+    //     }
+    // }
+if (this.wave == false){
+        this.speed = 1//this.speedStored
+        image(this.animation_wave[index],this.x,this.y); //11
+    if (index == 17){
+        this.speed = this.speedStored
+        this.idle = true
+    }
+}
+    pop();
+}
+
+playPoint(){
+    push();
+    scale(this.scale);
+    if (this.y < mouseY){
+        if ((mouseX - this.x) > 100){
+            let index1 = floor(this.index) % this.len_point1
+            image(this.animation_point1[index],this.x,this.y); //11
+            //play point1
+        }
+         else if ((mouseX - this.x) > 50){
+             let index2 = floor(this.index) % this.len_point2
+             image(this.animation_point2[index],this.x,this.y); //11
+            //play point2
+        }
+        if ((mouseX - this.x) < -100){
+            let index3 = floor(this.index) % this.len_point4
+            image(this.animation_point4[index],this.x,this.y); //11
+            //play point4
+        }
+         else if ((mouseX - this.x) < 0){
+            let index4 = floor(this.index) % this.len_point3
+            image(this.animation_point3[index],this.x,this.y); //11
+            //play point3
+        }
+    } else {
+        this.playIdle()
+    }
+    pop();
+
 }
 
 playChosen(){
@@ -69,15 +131,34 @@ playChosen(){
 
 
 show(){
+    tint(255)
+    ellipse(this.MouseOverX, this.MouseOverY, this.MouseOverArea);
 noTint();
-    this.playIdle()
+    if (dist(this.MouseOverX, this.MouseOverY, mouseX, mouseY) > this.MouseOverArea) {
+        this.wave = false
+    } else {
+        this.wave = true;
+        this.idle = false;
+    }
+    if(this.wave == true && mouseIsPressed){
+        this.chosen = true;
+        this.wave = false;
+    }
+    if (this.idle == true && this.point == false){
+        this.playIdle()
+    } else if (this.idle == true && this.point == true){
+        this.playPoint()
+    }
+    console.log(this.idle)
 
 }
 
-
-
 animate(){
-    this.index += this.speed;
+    if (this.chosen == true){
+        this.indexChosen += this.speed;
+    } else {
+        this.index += this.speed;
+    }
         }
 
 }

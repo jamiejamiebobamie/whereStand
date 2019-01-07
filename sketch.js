@@ -39,13 +39,13 @@ let anim_idle = [];
 let anim_wave = [];
 let anim_chosen = [];
 
-let title_idle = [];
-let title_wave = [];
-let title_chosen = [];
-let title_point1 = [];
-let title_point2 = [];
-let title_point3 = [];
-let title_point4 = [];
+let titleIdle = [];
+let titleWave = [];
+let titleChosen = [];
+let titlePoint1 = [];
+let titlePoint2 = [];
+let titlePoint3 = [];
+let titlePoint4 = [];
 
 
 function preload(){
@@ -54,7 +54,12 @@ function preload(){
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
-    testScale = loadImage('testPics/sprites/SpriteSheet_title-idle-115-471x500.png')
+    title_idle = loadImage('testPics/sprites/SpriteSheet_title-idle-115-471x500.png')
+    title_wave = loadImage('testPics/sprites/SpriteSheet_title-wave-18-471x500.png')
+    title_point1 = loadImage('testPics/sprites/SpriteSheet_title-point1-51-471x500.png')
+    title_point2 = loadImage('testPics/sprites/SpriteSheet_title-point2-49-471x500.png')
+    title_point3 = loadImage('testPics/sprites/SpriteSheet_title-point3-38-471x500.png')
+    title_point4 = loadImage('testPics/sprites/SpriteSheet_title-point4-41-471x500.png')
 }
 
 var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
@@ -133,17 +138,41 @@ function setup(){
     }
 
     for (var i = 0; i < 115; i++) {
-        let img = testScale.get((i*471),0, 471, 500);
-        title_idle.push(img);
+        let img = title_idle.get((i*471),0, 471, 500);
+        titleIdle.push(img);
+    }
+
+    for (var i = 0; i < 18; i++) {
+        let img = title_wave.get((i*471),0, 471, 500);
+        titleWave.push(img);
+    }
+
+    for (var i = 0; i < 51; i++) {
+        let img = title_point1.get((i*471),0, 471, 500);
+        titlePoint1.push(img);
+    }
+
+    for (var i = 0; i < 49; i++) {
+        let img = title_point2.get((i*471),0, 471, 500);
+        titlePoint2.push(img);
+    }
+
+    for (var i = 0; i < 38; i++) {
+        let img = title_point3.get((i*471),0, 471, 500);
+        titlePoint3.push(img);
+    }
+
+    for (var i = 0; i < 41; i++) {
+        let img = title_point4.get((i*471),0, 471, 500);
+        titlePoint4.push(img);
     }
 
     refresh()
-testTest = []
+    titleSprites = []
 for (var i = 0; i < 5; i++){
     let x = random(0, 1700);
     let y = random(100, 700);
-    testTest[i] = new TitleSprite(title_idle, title_idle, title_idle, title_idle, title_idle, title_idle, title_idle, x, y, random(.1, .8))
-    console.log(x, y)
+    titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleWave, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.1, .3))
 }
 // }
 
@@ -296,16 +325,23 @@ interv1 = setInterval(josephus, 800);
 });
 
 
+let pointer;
 
 function draw(){
     background(0);
     fill('#39FF14');
     if (start == false){
         text('Where Should I Stand?',50,100)
-        for (let test of testTest) {
-            test.show();
-            test.animate();
-        }
+        for (let sprite of titleSprites) {
+            sprite.show();
+            sprite.animate();
+            if (sprite.wave == true){
+                sprite.point = true;
+                // pointer = sprite
+            } else{
+                sprite.point = false;
+                }
+            }
     } else {
         text("level: " + ( 9 - count ),50,100)
         text("winner: " + win_jsS[2],50,150)
