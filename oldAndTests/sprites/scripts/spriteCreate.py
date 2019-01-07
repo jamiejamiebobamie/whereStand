@@ -58,6 +58,8 @@
 
 # https://minzkraut.com/2016/11/23/making-a-simple-spritesheet-generator-in-python/
 
+#NOTE: THE WAY THIS PROGRAM SORTS THE PHOTOS AND CREATES THE SPRITE SHEET ISN'T NUMERICALLY: 1,2,3. IT IS INSTEAD: 1, 11, 111, ETC... I HAVE NO IDEA WHY.
+
 from PIL import Image
 import os, math, time
 # max_frames_row = 10.0
@@ -69,7 +71,7 @@ tile_height = 0
 spritesheet_width = 0
 spritesheet_height = 0
 
-pics = "../sprite-spectator/spec-point4/"
+pics = "../sprite-title/pics-noGreen/title-point1/"
 
 files = os.listdir(pics)
 files.sort()
