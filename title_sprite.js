@@ -97,30 +97,26 @@ playPoint(){
 
     push();
     scale(this.scale);
-    if (this.y < mouseY){
-        if ((mouseX - this.x) > 100){
+        // if ((mouseX - this.x) > 100){
             let index1 = floor(this.index) % this.len_point1
             image(this.animation_point1[index1],this.x,this.y); //11
             //play point1
-        }
-         else if ((mouseX - this.x) > 50){
-             let index2 = floor(this.index) % this.len_point2
-             image(this.animation_point2[index2],this.x,this.y); //11
-            //play point2
-        }
-        if ((mouseX - this.x) < -100){
-            let index4 = floor(this.index) % this.len_point4
-            image(this.animation_point4[index4],this.x,this.y); //11
-            //play point4
-        }
-         else if ((mouseX - this.x) < 0){
-            let index3 = floor(this.index) % this.len_point3
-            image(this.animation_point3[index3],this.x,this.y); //11
-            //play point3
-        }
-    } else {
-        this.playIdle()
-    }
+        // }
+        //  else if ((mouseX - this.x) > 50){
+        //      let index2 = floor(this.index) % this.len_point2
+        //      image(this.animation_point2[index2],this.x,this.y); //11
+        //     //play point2
+        // }
+        // if ((mouseX - this.x) < -100){
+        //     let index4 = floor(this.index) % this.len_point4
+        //     image(this.animation_point4[index4],this.x,this.y); //11
+        //     //play point4
+        // }
+        //  else if ((mouseX - this.x) < 0){
+        //     let index3 = floor(this.index) % this.len_point3
+        //     image(this.animation_point3[index3],this.x,this.y); //11
+        //     //play point3
+        // }
     pop();
 
 }
@@ -129,14 +125,20 @@ playChosen(){
     let index = floor(this.indexChosen) % this.len_chosen
     push();
     scale(this.scale);
+    this.speed = 2
     image(this.animation_chosen[index],this.x,this.y); //11
+    if (index == 86) {
+        image(this.animation_chosen[86],this.x,this.y); //11
+        this.speed = this.freeze
+        }
     pop();
     }
 
 
+
 show(){
     tint(255)
-    ellipse(this.MouseOverX, this.MouseOverY, this.MouseOverArea);
+    // ellipse(this.MouseOverX, this.MouseOverY, this.MouseOverArea);
 noTint();
     if (dist(this.MouseOverX, this.MouseOverY, mouseX, mouseY) > this.MouseOverArea) {
         this.wave = false
@@ -149,9 +151,10 @@ noTint();
         this.wave = false;
     }
     if (this.chosen == true){
+        // console.log("hello")
         this.playChosen();
     // } else if (this.point == true){
-    //     // this.playPoint()
+    //     this.playPoint()
     } else if (this.idle == true){
         this.playIdle()
     } else {

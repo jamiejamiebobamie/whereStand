@@ -173,12 +173,14 @@ function setup(){
         titlePoint4.push(img);
     }
 
-    refresh()
+    refreshGame();
+    refreshTitle();
+
     titleSprites = []
-for (var i = 0; i < 5; i++){
+for (var i = 0; i < 3; i++){
     let x = random(0, 1700);
     let y = random(100, 700);
-    titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.1, .3))
+    titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.5, .7))
 }
 // }
 
@@ -221,7 +223,18 @@ for (var i = 0; i < 5; i++){
 
 }
 
-function refresh(){
+function refreshTitle(){
+    end = false;
+    begin = false;
+    titleSprites = []
+for (var i = 0; i < 3; i++){
+    let x = random(0, 1700);
+    let y = random(100, 700);
+    titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.5, .7))
+}
+}
+
+function refreshGame(){
     holograms = [];
     myVar2 = undefined;
     end = false;
@@ -274,7 +287,8 @@ title.addEventListener("click", function(){
     start = false;
     count = 9;
     forward.innerHTML = 'next level';
-    refresh();
+    refreshTitle();
+    refreshGame();
 });
 
 
@@ -286,21 +300,21 @@ forward.addEventListener("click", function(){
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
-        refresh();
+        refreshGame();
     } else if (count > 1) {
         forward.innerHTML = 'replay';
         count = count - 1;
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
-        refresh();
+        refreshGame();
     } else {
         forward.innerHTML = 'next level';
         count = 8;
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
-        refresh();
+        refreshGame();
     }
 
 interv1 = setInterval(josephus, 800);
@@ -311,7 +325,7 @@ re_up.addEventListener("click", function(){
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
-        refresh();
+        refreshGame();
 
 interv1 = setInterval(josephus, 800);
 
@@ -341,12 +355,11 @@ function draw(){
         for (let sprite of titleSprites) {
             sprite.show();
             sprite.animate();
-            if (sprite.wave == true){
-                sprite.point = true;
-                // pointer = sprite
-            } else{
-                sprite.point = false;
-                }
+            // if (sprite.wave == true){
+            //     sprite.point = true
+            // } else{
+            //     sprite.point = false;
+            //     }
             }
     } else {
         text("level: " + ( 9 - count ),50,100)
