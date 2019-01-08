@@ -358,11 +358,17 @@ interv1 = setInterval(josephus, 800);
 
 let pointer;
 
+let b = new Button("play", 300, 400)
+let c = new Button("about", 300, 500)
+
 function draw(){
     background(0);
     fill('#39FF14');
     if (start == false){
+        textSize(30);
         text('Where Should I Stand?',50,100)
+        b.show();
+        c.show();
         for (let sprite of titleSprites) {
             sprite.show();
             sprite.animate();
