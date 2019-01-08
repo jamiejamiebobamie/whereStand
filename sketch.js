@@ -176,12 +176,12 @@ function setup(){
     refreshGame();
     refreshTitle();
 
-    titleSprites = []
-for (var i = 0; i < 3; i++){
-    let x = random(0, 1700);
-    let y = random(100, 700);
-    titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.5, .7))
-}
+//     titleSprites = []
+// for (var i = 0; i < 5; i++){
+//     let x = random(0, 1700);
+//     let y = random(100, 700);
+//     titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.5, .7))
+// }
 // }
 
 // if (start == true){
@@ -227,7 +227,7 @@ function refreshTitle(){
     end = false;
     begin = false;
     titleSprites = []
-for (var i = 0; i < 3; i++){
+for (var i = 0; i < 5; i++){
     let x = random(0, 1700);
     let y = random(100, 700);
     titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.5, .7))
@@ -338,7 +338,7 @@ back.addEventListener("click", function(){
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
-        refresh();
+        refreshGame();
     }
 
 interv1 = setInterval(josephus, 800);
