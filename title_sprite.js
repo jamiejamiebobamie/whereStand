@@ -57,7 +57,7 @@ fromGreenText(inp){
 
 
 playIdle(){
-let index = floor(this.index) % this.len_idle;
+let index = floor(this.index/2) % this.len_idle;
 
 push();
 scale(this.scale)
@@ -66,7 +66,7 @@ pop();
     }
 
 playWave(){
-    let index = floor(this.index) % this.len_wave
+    let index = floor(this.indexWave) % this.len_wave
     push();
     scale(this.scale)
 
@@ -137,7 +137,8 @@ playChosen(){
 
 
 show(){
-    tint(255)
+    // tint(this.fromGreenHolo(this.green), this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
+    // tint(255)
     // ellipse(this.MouseOverX, this.MouseOverY, this.MouseOverArea);
 noTint();
     if (dist(this.MouseOverX, this.MouseOverY, mouseX, mouseY) > this.MouseOverArea) {
@@ -152,6 +153,7 @@ noTint();
     }
     if (this.chosen == true){
         // console.log("hello")
+        // tint(this.green, this.fromGreenHolo(this.green), this.fromGreenHolo(this.green), this.fromGreenHolo(this.green))
         this.playChosen();
     // } else if (this.point == true){
     //     this.playPoint()
@@ -165,7 +167,10 @@ noTint();
 animate(){
     if (this.chosen == true){
         this.indexChosen += this.speed;
+    } else if (this.idle != true) {
+        this.indexWave += this.speed;
     } else {
+        this.indexWave = 0;
         this.index += this.speed;
     }
         }

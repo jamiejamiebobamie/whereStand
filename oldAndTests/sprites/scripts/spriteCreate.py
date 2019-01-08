@@ -71,7 +71,7 @@ tile_height = 0
 spritesheet_width = 0
 spritesheet_height = 0
 
-pics = "../sprite-title/pics-noGreen/title-point1/"
+pics = "../sprite-title/pics-noGreen/title-idle/"
 
 files = os.listdir(pics)
 files.sort()

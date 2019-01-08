@@ -54,7 +54,7 @@ function preload(){
     wave = loadImage('testPics/sprites/wave150.png')
     chosen = loadImage('testPics/sprites/chosen150.png')
     font = loadFont('testPics/sprites/VeraMono.ttf');
-    title_idle = loadImage('testPics/sprites/SpriteSheet_title-idle-115-471x500.png')
+    title_idle = loadImage('testPics/sprites/SpriteSheet_title-idle-58-471x500.png')
     title_wave = loadImage('testPics/sprites/SpriteSheet_title-wave-18-471x500.png')
     title_chosen = loadImage('testPics/sprites/SpriteSheet_title-chosen-87-471x500.png')
     title_point1 = loadImage('testPics/sprites/SpriteSheet_title-point1-51-471x500.png')
@@ -138,7 +138,7 @@ function setup(){
         anim_chosen.push(img);
     }
 
-    for (var i = 0; i < 115; i++) {
+    for (var i = 0; i < 58; i++) {
         let img = title_idle.get((i*471),0, 471, 500);
         titleIdle.push(img);
     }
