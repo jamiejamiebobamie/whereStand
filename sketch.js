@@ -22,10 +22,37 @@ function winner(num){
 }
 
 // ---------------------------
-var title = document.getElementById('title');
-var forward = document.getElementById('forward');
-var re_up = document.getElementById('re_up');
-var back = document.getElementById('back');
+// var title = document.getElementById('title');
+// var forward = document.getElementById('forward');
+// var re_up = document.getElementById('re_up');
+// var back = document.getElementById('back');
+
+var modal = document.getElementById('myModal');
+
+// // Get the button that opens the modal
+// var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+// btn.onclick = function() {
+//   modal.style.display = "block";
+// }
+
+// When the user clicks on <span> (x), close the modal
+// span.onclick = function() {
+//   modal.style.display = "none";
+// }
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
 let win_jsS;
 var count = 9;
 win_jsS = winner(count);
@@ -108,7 +135,7 @@ function setup(){
     myVar2 = undefined;
     end = false;
     begin = false;
-    createCanvas(2400, 1200);
+    createCanvas(1900, 1100);
     textSize(25);
     textFont(font);
 //
@@ -294,33 +321,69 @@ function refreshGame(){
 
 // ---------------------------
 
-title.addEventListener("click", function(){
+// title.addEventListener("click", function(){
+//     start = false;
+//     count = 9;
+//     forward.innerHTML = 'next level';
+//     refreshTitle();
+//     refreshGame();
+// });
+
+function titleP5(){
     start = false;
     count = 9;
-    forward.innerHTML = 'next level';
+    // forward.innerHTML = 'next level';
     refreshTitle();
     refreshGame();
-});
+}
 
 
-forward.addEventListener("click", function(){
+// forward.addEventListener("click", function(){
+//
+//     if (count > 2){
+//         forward.innerHTML = 'next level';
+//         count = count - 1;
+//         win_jsS = winner(count);
+//         totalPoints = win_jsS[0];
+//         start = true;
+//         refreshGame();
+//     } else if (count > 1) {
+//         forward.innerHTML = 'replay';
+//         count = count - 1;
+//         win_jsS = winner(count);
+//         totalPoints = win_jsS[0];
+//         start = true;
+//         refreshGame();
+//     } else {
+//         forward.innerHTML = 'next level';
+//         count = 8;
+//         win_jsS = winner(count);
+//         totalPoints = win_jsS[0];
+//         start = true;
+//         refreshGame();
+//     }
+//
+// interv1 = setInterval(josephus, 800);
+//
+// });
 
+function forwardP5(){
     if (count > 2){
-        forward.innerHTML = 'next level';
+        // forward.innerHTML = 'next level';
         count = count - 1;
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
         refreshGame();
     } else if (count > 1) {
-        forward.innerHTML = 'replay';
+        // forward.innerHTML = 'replay';
         count = count - 1;
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
         start = true;
         refreshGame();
     } else {
-        forward.innerHTML = 'next level';
+        // forward.innerHTML = 'next level';
         count = 8;
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
@@ -329,21 +392,41 @@ forward.addEventListener("click", function(){
     }
 
 interv1 = setInterval(josephus, 800);
+}
 
-});
+// re_up.addEventListener("click", function(){
+//         win_jsS = winner(count);
+//         totalPoints = win_jsS[0];
+//         start = true;
+//         refreshGame();
+//
+// interv1 = setInterval(josephus, 800);
+//
+// });
 
-re_up.addEventListener("click", function(){
-        win_jsS = winner(count);
-        totalPoints = win_jsS[0];
-        start = true;
-        refreshGame();
+function refreshP5(){
+    win_jsS = winner(count);
+    totalPoints = win_jsS[0];
+    start = true;
+    refreshGame();
 
 interv1 = setInterval(josephus, 800);
+}
+//
+// back.addEventListener("click", function(){
+//
+//     if (count < 8){
+//         count = count + 1;
+//         win_jsS = winner(count);
+//         totalPoints = win_jsS[0];
+//         start = true;
+//         refreshGame();
+//     }
+//
+// interv1 = setInterval(josephus, 800);
+// });
 
-});
-
-back.addEventListener("click", function(){
-
+function backP5(){
     if (count < 8){
         count = count + 1;
         win_jsS = winner(count);
@@ -353,13 +436,17 @@ back.addEventListener("click", function(){
     }
 
 interv1 = setInterval(josephus, 800);
-});
+}
 
 
 let pointer;
 
-let b = new Button("play", 300, 400)
-let c = new Button("about", 300, 500)
+let a = new Play("play", 300, 400)
+let b = new About("about", 300, 500)
+let c = new Menu("menu", 50, 25)
+let d = new NextLevel("next", 250, 25)
+let e = new RefreshLevel("again", 450, 25)
+let f = new PreviousLevel("last", 650, 25)
 
 function draw(){
     background(0);
@@ -367,8 +454,17 @@ function draw(){
     if (start == false){
         textSize(30);
         text('Where Should I Stand?',50,100)
+        a.show();
+        if(a.click()){
+            forwardP5();
+        }
+        b.x = b.storedX;
+        b.y = b.storedY;
         b.show();
-        c.show();
+        if(b.click()){
+            modal.style.display = "block";
+        }
+        // d.show();
         for (let sprite of titleSprites) {
             sprite.show();
             sprite.animate();
@@ -379,10 +475,34 @@ function draw(){
             //     }
             }
     } else {
-        text("level: " + ( 9 - count ),50,100)
-        text("winner: " + win_jsS[2],50,150)
+        c.show();
+        if (c.click()){
+            titleP5();
+        }
+        d.show();
+        if(d.click()){
+            forwardP5();
+        }
+        e.show();
+        if(e.click()){
+            refreshP5();
+        }
+
+        f.show();
+        if(f.click()){
+            backP5();
+        }
+        b.x = 850;
+        b.y = 25;
+        b.show();
+        if(b.click()){
+            modal.style.display = "block";
+        }
+        fill('#39FF14');
+        text("level: " + ( 9 - count ),50,145)
+        text("winner: " + win_jsS[2],50,195)
         if (begin == true){
-        text('guess:  ' + guess, 50 , 200)
+        text('guess:  ' + guess, 50 , 245)
 
         // TRACER CLASS TO BETTER SHOW THE PROGRESSION OF OUTS
         //
