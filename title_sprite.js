@@ -20,7 +20,7 @@ class TitleSprite {
         this.len_chosen = this.animation_chosen.length
         this.x = x;
         this.y = y;
-        this.scale = random(0.3, 1) //the larger the y, the closer, the bigger the scale, 1x being the largest
+        this.scale = this.y/700
         this.idle = true;
         this.wave = false;
         this.chosen = false;

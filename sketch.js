@@ -224,12 +224,23 @@ function setup(){
 }
 
 function refreshTitle(){
+    let range = {
+        1: [random(500, 700), random(300, 380)],
+        2: [random(700, 900), random(380, 460)],
+        3: [random(900, 1100), random(460, 540)],
+        4: [random(1100, 1300), random(540, 620)],
+        5: [random(1300, 1500), random(620, 700)]
+    }
+    let grid = makeVertices(5)
     end = false;
     begin = false;
     titleSprites = []
 for (var i = 0; i < 5; i++){
-    let x = random(0, 1700);
-    let y = random(100, 700);
+    console.log(random(500, 1500)-(grid[i][0]*100),random(300, 700)-(grid[i][1]))
+    let x = range[grid[i][0]][0]*2;
+    let y = range[grid[i][1]][1]-100;
+
+    // console.log([x,y])
     titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.5, .7))
 }
 }
