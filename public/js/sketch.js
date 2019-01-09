@@ -69,10 +69,6 @@ let anim_chosen = [];
 let titleIdle = [];
 let titleWave = [];
 let titleChosen = [];
-let titlePoint1 = [];
-let titlePoint2 = [];
-let titlePoint3 = [];
-let titlePoint4 = [];
 
 
 function preload(){
@@ -84,10 +80,6 @@ function preload(){
     title_idle = loadImage('images/SpriteSheet_title-idle-58-471x500.png')
     title_wave = loadImage('images/SpriteSheet_title-wave-18-471x500.png')
     title_chosen = loadImage('images/SpriteSheet_title-chosen-87-471x500.png')
-    title_point1 = loadImage('images/SpriteSheet_title-point1-51-471x500.png')
-    title_point2 = loadImage('images/SpriteSheet_title-point2-49-471x500.png')
-    title_point3 = loadImage('images/SpriteSheet_title-point3-38-471x500.png')
-    title_point4 = loadImage('images/SpriteSheet_title-point4-41-471x500.png')
 }
 
 var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
@@ -178,26 +170,6 @@ function setup(){
     for (var i = 0; i < 87; i++) {
         let img = title_chosen.get((i*471),0, 471, 500);
         titleChosen.push(img);
-    }
-
-    for (var i = 0; i < 51; i++) {
-        let img = title_point1.get((i*471),0, 471, 500);
-        titlePoint1.push(img);
-    }
-
-    for (var i = 0; i < 49; i++) {
-        let img = title_point2.get((i*471),0, 471, 500);
-        titlePoint2.push(img);
-    }
-
-    for (var i = 0; i < 38; i++) {
-        let img = title_point3.get((i*471),0, 471, 500);
-        titlePoint3.push(img);
-    }
-
-    for (var i = 0; i < 41; i++) {
-        let img = title_point4.get((i*471),0, 471, 500);
-        titlePoint4.push(img);
     }
 
     refreshGame();

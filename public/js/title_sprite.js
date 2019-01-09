@@ -1,20 +1,12 @@
 class TitleSprite {
-    constructor(idle, wave, chosen, point1, point2, point3, point4, x, y, speed){
+    constructor(idle, wave, chosen, x, y, speed){
         this.speed = speed;
         this.animation_idle = idle;
         this.animation_wave = wave;
         this.animation_chosen = chosen;
-        this.animation_point1 = point1;
-        this.animation_point2 = point2;
-        this.animation_point3 = point3;
-        this.animation_point4 = point4;
         this.index = 0;
         this.indexWave = 0;
         this.indexChosen = 0;
-        this.len_point1 = this.animation_point1
-        this.len_point2 = this.animation_point2
-        this.len_point3 = this.animation_point3
-        this.len_point4 = this.animation_point4
         this.len_idle = this.animation_idle.length
         this.len_wave = this.animation_wave.length
         this.len_chosen = this.animation_chosen.length
@@ -91,34 +83,6 @@ if (this.wave == false){
     }
 }
     pop();
-}
-
-playPoint(){
-
-    push();
-    scale(this.scale);
-        // if ((mouseX - this.x) > 100){
-            let index1 = floor(this.index) % this.len_point1
-            image(this.animation_point1[index1],this.x,this.y); //11
-            //play point1
-        // }
-        //  else if ((mouseX - this.x) > 50){
-        //      let index2 = floor(this.index) % this.len_point2
-        //      image(this.animation_point2[index2],this.x,this.y); //11
-        //     //play point2
-        // }
-        // if ((mouseX - this.x) < -100){
-        //     let index4 = floor(this.index) % this.len_point4
-        //     image(this.animation_point4[index4],this.x,this.y); //11
-        //     //play point4
-        // }
-        //  else if ((mouseX - this.x) < 0){
-        //     let index3 = floor(this.index) % this.len_point3
-        //     image(this.animation_point3[index3],this.x,this.y); //11
-        //     //play point3
-        // }
-    pop();
-
 }
 
 playChosen(){
