@@ -240,7 +240,7 @@ for (var i = 0; i < 5; i++){
     let y = range[grid[i][1]][1]-100;
 
     // console.log([x,y])
-    titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, titlePoint1, titlePoint2, titlePoint3, titlePoint4, x, y, random(.5, .7))
+    titleSprites[i] = new TitleSprite(titleIdle, titleWave, titleChosen, x, y, random(.5, .7))
 }
 }
 
