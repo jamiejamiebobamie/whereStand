@@ -1,0 +1,56 @@
+body{
+    background-color: black;
+}
+
+button{
+    z-index: 2;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgba(0,0,0,0.9); /* Fallback color */
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 5px solid rgba(57,255,20,0.8);
+  width: 70%; /* Could be more or less, depending on screen size */
+  display: flex;
+  wrap: auto;
+  color: rgba(57,255,20, 0.8);
+  font-size: 30px;
+  font-family: courier;
+  line-height: 1.7em;
+  font-weight: normal;
+}
+
+.modal-video{
+    display: flex;
+}
+
+/* The Close Button */
+.close {
+  color: rgb(10,255,10);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgba(255,232,6, .3);
+  text-decoration: none;
+  cursor: pointer;
+}
