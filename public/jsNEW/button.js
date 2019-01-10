@@ -5,6 +5,7 @@ class Button {
         this.y = y;
         this.size = 50;
         this.hover = false;
+        this.flasher = false;
     }
 
     show(){
@@ -21,6 +22,19 @@ class Button {
         }
     }
 
+    flash(){
+        if (this.flasher == true){
+            fill('#39FF14')
+            rect(this.x, this.y, this.size*2, this.size)
+            fill(0)
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        } else {
+            fill('#39FF14')
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        }
+
+    }
+
 }
 
 // CODING TO-DO LEARN ABOUT HOW TO USE EXTENDS
@@ -35,7 +49,7 @@ class Button {
 //         this.hover = false;
 //     }
 //
-//     if (this.hover == true && mouseIsPressed) {
+//     if (this.hover == true && mouseReleased) {
 //         console.log('hi')
 //     }
 //
@@ -118,6 +132,8 @@ class About {
         this.hover = false;
         this.storedX = x;
         this.storedY = y;
+        this.flasher = true;
+        this.flashOn = true;
     }
 
     show(){
@@ -136,10 +152,28 @@ class About {
 
     click(){
         if (this.hover == true && mouseIsPressed) {
+            this.flasher == false;
             return true
         }
     }
 
+    flash(){
+        if (this.flashOn){
+        if (this.flasher){
+            fill('#39FF14')
+            rect(this.x, this.y, this.size*2, this.size)
+            fill(0)
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+            this.flasher = false;
+        } else {
+            fill('#39FF14')
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+            this.flasher = true;
+        }
+
+    }
+
+}
 }
 
 class Menu {
@@ -167,8 +201,22 @@ class Menu {
 
     click(){
         if (this.hover == true && mouseIsPressed) {
+            this.flasher == false;
             return true
         }
+    }
+
+    flash(){
+        if (this.flasher == true){
+            fill('#39FF14')
+            rect(this.x, this.y, this.size*2, this.size)
+            fill(0)
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        } else {
+            fill('#39FF14')
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        }
+
     }
 
 }
@@ -180,6 +228,7 @@ class NextLevel {
         this.y = y;
         this.size = 50;
         this.hover = false;
+        this.flasher = false;
     }
 
     show(){
@@ -198,8 +247,22 @@ class NextLevel {
 
     click(){
         if (this.hover == true && mouseIsPressed) {
+            this.flasher == false;
             return true
         }
+    }
+
+    flash(){
+        if (this.flasher == true){
+            fill('#39FF14')
+            rect(this.x, this.y, this.size*2, this.size)
+            fill(0)
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        } else {
+            fill('#39FF14')
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        }
+
     }
 
 }
@@ -244,6 +307,7 @@ class RefreshLevel {
         this.y = y;
         this.size = 50;
         this.hover = false;
+        this.flasher = false;
     }
 
     show(){
@@ -262,8 +326,22 @@ class RefreshLevel {
 
     click(){
         if (this.hover == true && mouseIsPressed) {
+            this.flasher == false;
             return true
         }
+    }
+
+    flash(){
+        if (this.flasher == true){
+            fill('#39FF14')
+            rect(this.x, this.y, this.size*2, this.size)
+            fill(0)
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        } else {
+            fill('#39FF14')
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        }
+
     }
 
 }
@@ -276,6 +354,7 @@ class Help {
         this.y = y;
         this.size = 50;
         this.hover = false;
+        this.flasher = false;
     }
 
     show(){
@@ -294,8 +373,22 @@ class Help {
 
     click(){
         if (this.hover == true && mouseIsPressed) {
+            this.flasher == false;
             return true
         }
+    }
+
+    flash(){
+        if (this.flasher == true){
+            fill('#39FF14')
+            rect(this.x, this.y, this.size*2, this.size)
+            fill(0)
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        } else {
+            fill('#39FF14')
+            text(this.label, this.x+this.size/5, this.y+this.size/1.5)
+        }
+
     }
 
 }

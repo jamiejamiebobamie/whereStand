@@ -38,6 +38,8 @@ let dotShow = [1,2,3];
 
 let score = 0
 
+let hudBlock;
+
 
 
 
@@ -74,7 +76,8 @@ function setup(){
     myVar2 = undefined;
     end = false;
     begin = false;
-    createCanvas(1900, 1100);
+    var canvas = createCanvas(1900, 1100);
+    canvas.parent('sketch-holder');
     textSize(25);
     textFont(font);
 
@@ -185,10 +188,9 @@ function refreshGame(){
             // console.log(starter.value)
             // console.log(dotArray[starter.value])
             dotShow = dotArray[starter.value-1]
-            console.log(dotShow)
+            // console.log(dotShow)
             startingDot = new Dot(dotShow[0], dotShow[1], dotShow[2], starter.value)
         }
-
 }
 
 function titleP5(){
@@ -208,6 +210,7 @@ function forwardP5(){
         refreshGame();
         win_jsS = loopShift(win_jsS[0], starter.value)
         temp_win_jsS = win_jsS
+        hudBlock = new HUD(500+2*win_jsS[0], 650, centerX, centerY, win_jsS[0], (9-count), score, win_jsS[2])
     } else if (count > 1) {
         count = count - 1;
         win_jsS = winner(count);
@@ -277,7 +280,12 @@ function draw(){
         }
         b.x = b.storedX;
         b.y = b.storedY;
-        b.show();
+        b.flasher = true;
+        if (b.flasher == true){
+            b.flash();
+        } else {
+            b.show();
+        }
         if(b.click()){
             modal.style.display = "block";
         }
@@ -304,13 +312,17 @@ function draw(){
         if(f.click()){
             backP5();
         }
-        g.show();
-        if(g.click()){
-            text('Every other person is out.',1100,275)
-            text('To win, pick the last man standing.',1100,350)
-            text('The winner\'s place is written',1100,425)
-            text('in binary to the left.',1150,475)
+        if (g.flasher == true){
+            g.flash();
+        } else {
+            g.show();
         }
+        // if(g.click()){
+        //     text('Every other person is out.',1100,275)
+        //     text('To win, pick the last man standing.',1100,350)
+        //     text('The winner\'s place is written',1100,425)
+        //     text('in binary to the left.',1150,475)
+        // }
         b.x = 850;
         b.y = 25;
         b.show();
@@ -324,6 +336,11 @@ function draw(){
         // for (let dotz of dotArray){
         //     dotz.show();
         // }
+        push();
+        rotate();
+        hudBlock.show();
+        hudBlock.orbit();
+        pop();
         startingDot.show();
         if (begin == true){
         text('guess:  ' + guess, 925 , 225)
