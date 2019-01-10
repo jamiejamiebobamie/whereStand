@@ -36,6 +36,8 @@ let titleChosen = []; //array of imageObjects. TITLESREEN sprite's chosen/out/de
 
 let dotShow = [1,2,3];
 
+let score = 0
+
 
 
 
@@ -133,6 +135,7 @@ for (var i = 0; i < 5; i++){
 }
 
 function refreshGame(){
+    newGame = true;
     dotArray = [];
     holograms = [];
     myVar2 = undefined;
@@ -315,19 +318,15 @@ function draw(){
             modal.style.display = "block";
         }
         fill('#39FF14');
-        text("level: " + ( 9 - count ),1100,445)
-
-        text("winner: " + temp_win_jsS[2],1100,495)
-
-        text("score: " + starter.value,100,175)
-
-
+        text("level: " + (9-count),100,175)
+        text("score: " + score,100,225)
+        text("winner: " + temp_win_jsS[2],925,175)
         // for (let dotz of dotArray){
         //     dotz.show();
         // }
         startingDot.show();
         if (begin == true){
-        text('guess:  ' + guess, 1100 , 545)
+        text('guess:  ' + guess, 925 , 225)
         }
         // } else {
         // // textSize(25);
@@ -336,12 +335,17 @@ function draw(){
         // // text('The winner\'s place is written',1100,425)
         // // text('in binary to the left.',1150,475)
         // }
-    //     if ( end == true){
-    // //         if (temp_win_jsS[1] == guess) {
-    // //         //     textSize(35);
-    // //         //     text('You\'re right!',1100, 400)
-    // //         //     text('The number ' + temp_win_jsS[1] + ' is ' + temp_win_jsS[2] + ' in binary.',1100, 475)
-    // //         // } else{
+        if ( end == true){
+            if (newGame == true){
+            if (temp_win_jsS[1] == guess) {
+                score+=1;
+                newGame = false;
+            } else {
+                score-=1;
+                newGame = false;
+            }
+        }
+    }
     // //         //     textSize(35);
     // //         //     text('Try again.',1100, 275)
     // //         //     textSize(25);
@@ -353,8 +357,6 @@ function draw(){
     // //         //     text('If there\'s a 0, don\'t add that value.',1100, 650)
     // //         //     text('1 = 1, 10 = 2, 11 = 3, 100 = 4, and so on!',1100, 725)
     // //         //     text('(Hint: Don\'t guess evens.)',1100, 800)
-    // //         // }
-    // // }
 
     for (let hologram of holograms) {
         hologram.show();
@@ -372,6 +374,6 @@ function draw(){
         }
 }
 
-textSize(25);
-}
+    textSize(25);
+    }
 }
