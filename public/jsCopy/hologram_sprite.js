@@ -1,10 +1,9 @@
 class HologramSprite {
-    constructor(idle, wave, chosen, x, y, rotation, speed, n){
+    constructor(idle, wave, chosen, x, y, speed, n){
         this.speed = speed;
         this.animation_idle = idle;
         this.animation_wave = wave;
         this.animation_chosen = chosen;
-        this.rotation = rotation;
         this.index = 0;
         this.indexChosen = 0;
         this.len_idle = this.animation_idle.length

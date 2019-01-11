@@ -40,6 +40,10 @@ let score = 0
 
 let hudBlock;
 
+let josephSpeed = 800;
+
+let needHelp = false; //help button boolean. draw function
+
 
 
 
@@ -73,6 +77,7 @@ function josephus(){
 }}
 
 function setup(){
+    hudBlock = new HUD(500+2*win_jsS[0], 650, centerX, centerY, win_jsS[0], (9-count), score, win_jsS[2])
     myVar2 = undefined;
     end = false;
     begin = false;
@@ -138,6 +143,7 @@ for (var i = 0; i < 5; i++){
 }
 
 function refreshGame(){
+    hudBlock.guess = "__"
     newGame = true;
     dotArray = [];
     holograms = [];
@@ -149,7 +155,7 @@ function refreshGame(){
             var radius = totalPoints*10
             var x = drawPoint(radius, i, totalPoints)[0]+centerX
             var y = drawPoint(radius, i, totalPoints)[1]+centerY
-            holograms[i] = new HologramSprite(anim_idle, anim_wave, anim_chosen, x, y, radians(0), random(.1, .8), i)
+            holograms[i] = new HologramSprite(anim_idle, anim_wave, anim_chosen, x, y, random(.1, .8), i)
             var radius = 35+totalPoints*10.1
             var x = drawPoint(radius, i, totalPoints)[0]+centerX
             var y = drawPoint(radius, i, totalPoints)[1]+centerY
@@ -210,7 +216,9 @@ function forwardP5(){
         refreshGame();
         win_jsS = loopShift(win_jsS[0], starter.value)
         temp_win_jsS = win_jsS
-        hudBlock = new HUD(500+2*win_jsS[0], 650, centerX, centerY, win_jsS[0], (9-count), score, win_jsS[2])
+        hudBlock.n = win_jsS[0]
+        hudBlock.level = (9-count)
+        hudBlock.winner = win_jsS[2]
     } else if (count > 1) {
         count = count - 1;
         win_jsS = winner(count);
@@ -219,7 +227,10 @@ function forwardP5(){
         refreshGame();
         win_jsS = loopShift(win_jsS[0], starter.value)
         temp_win_jsS = win_jsS
-    } else {
+        hudBlock.n = win_jsS[0]
+        hudBlock.level = (9-count)
+        hudBlock.winner = win_jsS[2]
+        } else {
         count = 8;
         win_jsS = winner(count);
         totalPoints = win_jsS[0];
@@ -227,9 +238,13 @@ function forwardP5(){
         refreshGame();
         win_jsS = loopShift(win_jsS[0], starter.value)
         temp_win_jsS = win_jsS
+        hudBlock.n = win_jsS[0]
+        hudBlock.level = (9-count)
+        hudBlock.winner = win_jsS[2]
     }
+    hudBlock.x = centerX+300+(9-count)*50
 
-interv1 = setInterval(josephus, 800);
+interv1 = setInterval(josephus, josephSpeed);
 }
 
 function refreshP5(){
@@ -239,8 +254,12 @@ function refreshP5(){
     refreshGame();
     win_jsS = loopShift(win_jsS[0], starter.value)
     temp_win_jsS = win_jsS
+    hudBlock.n = win_jsS[0]
+    hudBlock.winner = win_jsS[2]
+    hudBlock.x = centerX+300+(9-count)*50
 
-interv1 = setInterval(josephus, 800);
+
+interv1 = setInterval(josephus, josephSpeed);
 }
 
 function backP5(){
@@ -252,9 +271,13 @@ function backP5(){
         refreshGame();
         win_jsS = loopShift(win_jsS[0], starter.value)
         temp_win_jsS = win_jsS
+        hudBlock.level = (9-count)
+        hudBlock.n = win_jsS[0]
+        hudBlock.winner = win_jsS[2]
+        hudBlock.x = centerX+300+(9-count)*50
     }
 
-interv1 = setInterval(josephus, 800);
+interv1 = setInterval(josephus, josephSpeed);
 }
 
 
@@ -280,12 +303,12 @@ function draw(){
         }
         b.x = b.storedX;
         b.y = b.storedY;
-        b.flasher = true;
-        if (b.flasher == true){
-            b.flash();
-        } else {
+        // b.flasher = true;
+        // if (b.flasher == true){
+        //     b.flash();
+        // } else {
             b.show();
-        }
+        // }
         if(b.click()){
             modal.style.display = "block";
         }
@@ -295,6 +318,57 @@ function draw(){
             sprite.animate();
             }
     } else {
+        if (needHelp){
+
+
+            for (let hologram of holograms) {
+                hologram.show();
+                hologram.animate();
+                if (hologram.begin && begin == false) {
+                    guess = hologram.n
+                    begin = true;
+                }
+                if (myVar2 != undefined){
+                holograms[myVar2-1].out = true;
+            }
+                if (end == true && hologram.out != true){
+                    hologram.winner = true;
+                    realWinner = hologram.n;
+                }
+        }
+
+fill('#39FF14');
+            startingDot.show();
+
+            textSize(25);
+            text('Every other person is out.',100,175)
+            text('To win, pick the last man standing.',100,250)
+            text('The winner\'s place is written',100,325)
+            text('in binary to the left.',150,375)
+            text('The dot indicates who starts.',100,450)
+
+            text('In binary, you read the numbers from right to left',700, 350)
+            text('and add up the values as you go.',750, 400)
+            text('The values are powers of two:',700, 475)
+            text('32, 16, 8, 4, 2, 1.',750, 525)
+            text('If there\'s a 1, add that value to the number.',700, 600)
+            text('If there\'s a 0, don\'t add that value.',700, 650)
+            text('1 = 1, 10 = 2, 11 = 3, 100 = 4, and so on!',700, 725)
+
+
+
+
+        g.show();
+    if(g.click()){
+        if (needHelp){
+            needHelp = false;
+        } else{
+            needHelp = true;
+        }
+    }
+
+        }else{
+        // hudBlock = new HUD(500+2*win_jsS[0], 650, centerX, centerY, win_jsS[0], (9-count), score, win_jsS[2])
         c.show();
         if (c.click()){
             titleP5();
@@ -312,68 +386,54 @@ function draw(){
         if(f.click()){
             backP5();
         }
-        if (g.flasher == true){
-            g.flash();
-        } else {
+        // if (g.flasher == true){
+        //     g.flash();
+        // } else {
             g.show();
+        if(g.click()){
+            if (needHelp){
+                needHelp = false;
+            } else{
+                needHelp = true;
+            }
         }
-        // if(g.click()){
-        //     text('Every other person is out.',1100,275)
-        //     text('To win, pick the last man standing.',1100,350)
-        //     text('The winner\'s place is written',1100,425)
-        //     text('in binary to the left.',1150,475)
-        // }
         b.x = 850;
         b.y = 25;
         b.show();
         if(b.click()){
             modal.style.display = "block";
         }
-        fill('#39FF14');
-        text("level: " + (9-count),100,175)
-        text("score: " + score,100,225)
-        text("winner: " + temp_win_jsS[2],925,175)
+        // fill('#39FF14');
+        // text("level: " + (9-count),100,175)
+        // text("score: " + score,100,225)
+        // text("winner: " + temp_win_jsS[2],925,175)
         // for (let dotz of dotArray){
         //     dotz.show();
         // }
-        push();
-        rotate();
+        // push();
         hudBlock.show();
-        hudBlock.orbit();
-        pop();
+        // hudBlock.orbit();
+        // pop();
         startingDot.show();
         if (begin == true){
-        text('guess:  ' + guess, 925 , 225)
+            hudBlock.guess = guess;
+        // text('guess:  ' + guess, 925 , 225)
         }
         // } else {
-        // // textSize(25);
-        // // text('Every other person is out.',1100,275)
-        // // text('To win, pick the last man standing.',1100,350)
-        // // text('The winner\'s place is written',1100,425)
-        // // text('in binary to the left.',1150,475)
+
         // }
         if ( end == true){
             if (newGame == true){
             if (temp_win_jsS[1] == guess) {
-                score+=1;
+                hudBlock.score+=1;
                 newGame = false;
             } else {
-                score-=1;
+                hudBlock.score-=1;
                 newGame = false;
             }
         }
     }
-    // //         //     textSize(35);
-    // //         //     text('Try again.',1100, 275)
-    // //         //     textSize(25);
-    // //         //     text('In binary, you read the numbers from right to left',1100, 350)
-    // //         //     text('and add up the values as you go.',1150, 400)
-    // //         //     text('The values are powers of two:',1100, 475)
-    // //         //     text('32, 16, 8, 4, 2, 1.',1150, 525)
-    // //         //     text('If there\'s a 1, add that value to the number.',1100, 600)
-    // //         //     text('If there\'s a 0, don\'t add that value.',1100, 650)
-    // //         //     text('1 = 1, 10 = 2, 11 = 3, 100 = 4, and so on!',1100, 725)
-    // //         //     text('(Hint: Don\'t guess evens.)',1100, 800)
+
 
     for (let hologram of holograms) {
         hologram.show();
@@ -393,4 +453,5 @@ function draw(){
 
     textSize(25);
     }
+}
 }
