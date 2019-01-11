@@ -344,7 +344,7 @@ fill('#39FF14');
             text('Every other person is out.',100,175)
             text('To win, pick the last man standing.',100,250)
             text('The winner\'s place is written',100,325)
-            text('in binary to the left.',150,375)
+            text('in binary.',150,375)
             text('The dot indicates who starts.',100,450)
 
             text('In binary, you read the numbers from right to left',700, 350)
